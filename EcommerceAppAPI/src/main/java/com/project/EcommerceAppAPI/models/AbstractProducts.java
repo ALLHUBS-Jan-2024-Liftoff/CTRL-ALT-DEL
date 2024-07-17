@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 @MappedSuperclass
-public abstract class Products {
+public abstract class AbstractProducts {
 
     @Id
     @GeneratedValue
@@ -59,7 +59,7 @@ public abstract class Products {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Products products = (Products) o;
+        AbstractProducts products = (AbstractProducts) o;
         return id == products.id && Objects.equals(name, products.name) && Objects.equals(description, products.description);
     }
 
