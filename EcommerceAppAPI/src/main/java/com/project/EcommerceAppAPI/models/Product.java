@@ -1,19 +1,21 @@
 package com.project.EcommerceAppAPI.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class AllProducts extends AbstractProducts{
+public class Product extends AbstractProducts{
 
     @NotNull(message = "Category is required")
+    @ManyToOne
     private ProductCategory productCategory;
 
-    public AllProducts(ProductCategory productCategory) {
+    public Product(ProductCategory productCategory) {
         this.productCategory = productCategory;
     }
 
-    public AllProducts() {
+    public Product() {
     }
 
     public ProductCategory getProductCategory() {
