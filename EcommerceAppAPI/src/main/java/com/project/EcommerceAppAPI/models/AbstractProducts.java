@@ -22,13 +22,6 @@ public abstract class AbstractProducts {
     @Size(min = 1, max = 255, message = "Characters must be between 1-255")
     private String description;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
