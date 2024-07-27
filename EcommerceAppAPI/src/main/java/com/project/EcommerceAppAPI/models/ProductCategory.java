@@ -2,30 +2,30 @@ package com.project.EcommerceAppAPI.models;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class ProductCategory extends AbstractProducts{
+    @OneToMany(mappedBy = "productCategory")
+    private List<Product> products = new ArrayList<>();
 
-    @NotBlank
-    @Size(min=3,max=25, message="Category Name must be 3-25 characters long")
-    private String category;
-
-    public ProductCategory(String category) {
-        this.category = category;
+    public ProductCategory(List<Product> products) {
+        this.products = products;
     }
 
     public ProductCategory() {
     }
 
-    public String getCategory() {
-        return category;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
-
-
 }
