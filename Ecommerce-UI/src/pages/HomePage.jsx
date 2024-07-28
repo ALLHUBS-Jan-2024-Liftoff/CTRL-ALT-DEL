@@ -1,6 +1,8 @@
 import React from "react";
 import Hero from "../components/Hero";
 import FeaturedProduct from '../components/FeaturedProduct';
+import { Link } from 'react-router-dom';
+
 // import ProductList from '../components/ProductList';
 
 const HomePage = () => {
@@ -8,9 +10,10 @@ const HomePage = () => {
     <div>
       <Hero />
       <FeaturedProduct />
-
+      <Link to="/cart">Go to Cart</Link>
       {/* <ProductList /> */}
     </div>
+    
   );
 };
 
