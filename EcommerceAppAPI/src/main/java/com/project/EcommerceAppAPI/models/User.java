@@ -1,10 +1,14 @@
 package com.project.EcommerceAppAPI.models;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class User {
+    @Id
+    @GeneratedValue
     @NotNull
     private String username;
     @NotNull
