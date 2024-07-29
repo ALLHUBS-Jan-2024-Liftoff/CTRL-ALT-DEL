@@ -9,8 +9,8 @@ import FeaturedProduct from './components/FeaturedProduct';
 
 // import ProductsPage from './pages/ProductsPage';
 // import Cart from './pages/Cart';
-// import LoginPage from './pages/LoginPage';
-// import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
 
@@ -23,8 +23,8 @@ function App() {
         {/* <Route path="/products" element={<ProductList />}/> */}
         {/* <Route path="/product/:id" element={<ProductDetails />} /> */}
         {/* <Route path="/cart" element={Cart}/> */}
-        {/* <Route path="/login" element={Login}/> */}
-        {/* <Route path="/register" element={Register}/> */}
+        <Route path="/login" element={<LoginPage/>} />
+        <Route path="/register" element={<RegisterPage/>}/> 
       </Routes>
       <Footer />
     </div>
