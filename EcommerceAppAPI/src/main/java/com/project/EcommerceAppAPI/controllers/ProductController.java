@@ -18,7 +18,6 @@ public class ProductController {
 
     @Autowired
     private ProductRepository productRepository;
-
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
 
