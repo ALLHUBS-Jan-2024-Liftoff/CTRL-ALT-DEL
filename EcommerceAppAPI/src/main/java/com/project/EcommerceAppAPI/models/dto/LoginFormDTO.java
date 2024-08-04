@@ -4,8 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class LogInFormDTO {
-    public class LoginFormDTO {
+
+public class LoginFormDTO {
 
         @NotNull
         @NotBlank
@@ -33,5 +33,5 @@ public class LogInFormDTO {
             this.password = password;
         }
 
-    }
 }
+
