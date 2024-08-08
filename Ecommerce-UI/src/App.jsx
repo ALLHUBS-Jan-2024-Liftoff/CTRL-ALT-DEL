@@ -11,6 +11,7 @@ import ProductList from './components/ProductList';
 // import Cart from './pages/Cart';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import ProductForm from './components/ProductForm';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path ="/" element={<HomePage />} />
         <Route path="/products" element={<ProductList />}/>
+        <Route path="/createProduct" element={<ProductForm />}/>
         {/* <Route path="/product/:id" element={<ProductDetails />} /> */}
         {/* <Route path="/cart" element={Cart}/> */}
         <Route path="/login" element={<LoginPage/>} />
