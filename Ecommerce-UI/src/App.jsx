@@ -6,8 +6,8 @@ import Hero from './components/Hero';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import FeaturedProduct from './components/FeaturedProduct';
-
-// import ProductsPage from './pages/ProductsPage';
+import ProductsPage from './pages/ProductsPage';
+import ProductList from './components/ProductList';
 // import Cart from './pages/Cart';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -20,7 +20,7 @@ function App() {
       <Header />
       <Routes>
         <Route path ="/" element={<HomePage />} />
-        {/* <Route path="/products" element={<ProductList />}/> */}
+        <Route path="/products" element={<ProductList />}/>
         {/* <Route path="/product/:id" element={<ProductDetails />} /> */}
         {/* <Route path="/cart" element={Cart}/> */}
         <Route path="/login" element={<LoginPage/>} />
