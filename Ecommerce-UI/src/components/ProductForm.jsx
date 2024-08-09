@@ -33,8 +33,8 @@ const ProductForm = ({ currentProduct, onSave, onCancel }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div>
-                <label>Name</label>
+            <div className="mt-5">
+                <label className="form-label">Name</label>
                 <input
                     type="text"
                     name="name"
@@ -43,8 +43,8 @@ const ProductForm = ({ currentProduct, onSave, onCancel }) => {
                     required
                 />
             </div>
-            <div>
-                <label>Description</label>
+            <div >
+                <label className="form-label">Description</label>
                 <input
                     type="text"
                     name="description"
@@ -54,7 +54,7 @@ const ProductForm = ({ currentProduct, onSave, onCancel }) => {
                 />
             </div>
             <div>
-                <label>Price</label>
+                <label className="form-label">Price</label>
                 <input
                     type="number"
                     name="price"
@@ -63,8 +63,8 @@ const ProductForm = ({ currentProduct, onSave, onCancel }) => {
                     required
                 />
             </div>
-            <div>
-                <label>Category ID</label>
+            <div >
+                <label className="form-label">Category ID</label>
                 <input
                     type="number"
                     name="product_category_id"
@@ -73,9 +73,9 @@ const ProductForm = ({ currentProduct, onSave, onCancel }) => {
                     required
                 />
             </div>
-            <div>
-                <button type="submit">Save</button>
-                <button type="button" onClick={onCancel}>Cancel</button>
+            <div className="form-control">
+                <button type="submit" className="btn btn-primary">Save</button>
+                <button type="button" onClick={onCancel} className="btn btn-primary">Cancel</button>
             </div>
         </form>
     );

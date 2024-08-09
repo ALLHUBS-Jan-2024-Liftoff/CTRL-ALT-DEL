@@ -16,15 +16,15 @@ const ProductList = ({ onEdit }) => {
 
     return (
         <div>
-            <h2>Product List</h2>
-            <table>
+            <h2>All Products</h2>
+            <table className="table table-hover">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Category ID</th>
-                        <th>Actions</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Category ID</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,8 +35,7 @@ const ProductList = ({ onEdit }) => {
                             <td>{product.price}</td>
                             <td>{product.product_category_id}</td>
                             <td>
-                                <button onClick={() => onEdit(product)}>Edit</button>
-                                
+                                <button onClick={() => onEdit(product)} className="btn btn-primary mt-3">Add to cart</button>
                             </td>
                         </tr>
                     ))}
