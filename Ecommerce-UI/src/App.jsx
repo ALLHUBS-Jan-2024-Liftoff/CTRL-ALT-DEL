@@ -6,15 +6,20 @@ import Hero from './components/Hero';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import FeaturedProduct from './components/FeaturedProduct';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 // import ProductsPage from './pages/ProductsPage';
 // import Cart from './pages/Cart';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 
+const stripePromise = loadStripe('your-publishable-key-here');
+
 function App() {
 
   return (
+    
    <Router>
     <div>
       <Header />
