@@ -9,27 +9,33 @@ const CategoryList = ({ onEdit }) => {
     }, []);
 
     const fetchCategories = async () => {
-        const response = await getCategories();
+        try{
+            const response = await getCategories();
+            console.log(response.data);
         setCategories(response.data);
+        } catch(error){
+            console.log(error);
+        }
     };
 
     return (
-        <div>
+        <div className="mt-3">
             <h2>All Categories</h2>
             <table className="table table-hover">
-                <thead>
-                    <tr>
+                <thead className="mt-5">
+                    <tr className="form-label">
                         <th scope="col">Name</th>
                         <th scope="col">Description</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {categories.map(categories => (
-                        <tr key={categories.id}>
-                            <td>{categories.name}</td>
-                            <td>{categories.description}</td>
+                    {categories.map(category => (
+                        <tr key={category.id}>
+                            <td>{category.name}</td>
+                            <td>{category.description}</td>
                             <td>
-                                <button onClick={() => onEdit(categories)} className="btn btn-primary mt-3">Edit</button>
+                                <button onClick={() => onEdit(category)} className="btn btn-primary mt-3">Edit</button>
                             </td>
                         </tr>
                     ))}
