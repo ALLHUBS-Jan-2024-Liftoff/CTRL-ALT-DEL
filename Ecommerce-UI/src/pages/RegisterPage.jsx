@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "./axiosService";
+import axiosInstance from "../services/axiosService";
 
 const RegisterPage = () => {
 
@@ -98,6 +98,9 @@ return (
       <button type="submit">Register</button>
     </form>
     {message && <p>{message}</p>}
+    <p>
+      Already have an account? <a href="/login">Login</a>
+    </p>
   </div>
   );
 };
