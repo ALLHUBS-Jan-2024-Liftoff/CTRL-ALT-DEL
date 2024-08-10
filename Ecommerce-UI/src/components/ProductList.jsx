@@ -33,7 +33,7 @@ const ProductList = ({ onEdit }) => {
                             <td>{product.name}</td>
                             <td>{product.description}</td>
                             <td>{product.price}</td>
-                            <td>{product.product_category_id}</td>
+                            <td>{product.categoryId}</td>
                             <td>
                                 <button onClick={() => onEdit(product)} className="btn btn-primary mt-3">Add to cart</button>
                             </td>

@@ -2,12 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { createProduct, updateProduct } from '../services/axiosService';
 
-const ProductForm = ({ currentProduct, onSave, onCancel }) => {
+
+const ProductForm = ({ currentProduct, onSave}) => {
+    const [success, setSuccess] = useState(false);
     const [product, setProduct] = useState({
         name: '',
         description: '',
         price: '',
-        product_category_id: ''
+        categoryId: ''
     });
 
     useEffect(() => {
@@ -26,9 +28,27 @@ const ProductForm = ({ currentProduct, onSave, onCancel }) => {
         if (product.id) {
             await updateProduct(product.id, product);
         } else {
+            try{
             await createProduct(product);
+            setSuccess(true);
+            }
+            catch (error) {
+                console.error('Error creating product:', error);
+                setSuccess(false);
+            }
         }
         onSave();
+    };
+
+    const handelCancel = () => {
+        if (window.confirm('Are you sure you want to cancel? This will clear all fields.')) {
+            setProduct({
+                name: '',
+                description: '',
+                price: '',
+                categoryId: ''
+            });
+        }
     };
 
     return (
@@ -67,15 +87,16 @@ const ProductForm = ({ currentProduct, onSave, onCancel }) => {
                 <label className="form-label">Category ID</label>
                 <input
                     type="number"
-                    name="product_category_id"
-                    value={product.product_category_id}
+                    name="categoryId"
+                    value={product.categoryId}
                     onChange={handleChange}
                     required
                 />
             </div>
             <div className="form-control">
                 <button type="submit" className="btn btn-primary">Save</button>
-                <button type="button" onClick={onCancel} className="btn btn-primary">Cancel</button>
+                <button type="button" onClick={handelCancel} className="btn btn-primary">Cancel</button>
+                {success && <p>Product created successfully!</p>}
             </div>
         </form>
     );
