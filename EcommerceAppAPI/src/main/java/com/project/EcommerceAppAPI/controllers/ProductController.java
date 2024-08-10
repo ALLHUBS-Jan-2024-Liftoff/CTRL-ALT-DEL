@@ -43,7 +43,7 @@ public class ProductController {
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
         Optional<ProductCategory> productCategoryOptional = productCategoryRepository.findById(productDTO.getCategoryId());
-        ProductCategory productCategory = productCategoryOptional.get();
+        ProductCategory productCategory = productCategoryOptional.orElse(null);
         product.setProductCategory(productCategory);
 
         Product savedProduct =  productRepository.save(product);
