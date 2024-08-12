@@ -19,14 +19,13 @@ const CategoryList = ({ onEdit }) => {
     };
 
     return (
-        <div className="mt-3">
+        <div className="mt-5">
             <h2>All Categories</h2>
             <table className="table table-hover">
-                <thead className="mt-5">
+                <thead className="mt-3">
                     <tr className="form-label">
                         <th scope="col">Name</th>
                         <th scope="col">Description</th>
-                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,9 +33,6 @@ const CategoryList = ({ onEdit }) => {
                         <tr key={category.id}>
                             <td>{category.name}</td>
                             <td>{category.description}</td>
-                            <td>
-                                <button onClick={() => onEdit(category)} className="btn btn-primary mt-3">Edit</button>
-                            </td>
                         </tr>
                     ))}
                 </tbody>

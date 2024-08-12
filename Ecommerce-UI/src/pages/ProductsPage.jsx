@@ -22,6 +22,7 @@ const ProductsPage = () => {
       setCurrentProduct(null);
   };
 
+
   return (
       <div>
           <main>
