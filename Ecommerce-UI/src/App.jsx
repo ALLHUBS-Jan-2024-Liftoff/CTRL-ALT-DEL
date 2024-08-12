@@ -13,6 +13,8 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProductForm from './components/ProductForm';
 import CategoryForm from './components/CategoryForm';
+import CategoryList from './components/CategoryList';
+import Sellers from './components/Sellers';
 
 function App() {
 
@@ -23,8 +25,11 @@ function App() {
       <Routes>
         <Route path ="/" element={<HomePage />} />
         <Route path="/products" element={<ProductList />}/>
-        <Route path="/createProduct" element={<ProductForm />}/>
-        <Route path="/createCategory" element={<CategoryForm />}/>
+        <Route path="/newProduct" element={<ProductForm />}/>
+        <Route path="/allProducts" element={<ProductList />}/>
+        <Route path="/sellers" element={<Sellers />}/>
+        <Route path="/allCategories" element={<CategoryList />}/>
+        <Route path="/newCategory" element={<CategoryForm />}/>
         {/* <Route path="/product/:id" element={<ProductDetails />} /> */}
         {/* <Route path="/cart" element={Cart}/> */}
         <Route path="/login" element={<LoginPage/>} />
