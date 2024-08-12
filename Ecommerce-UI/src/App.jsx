@@ -18,6 +18,15 @@ import './App.css';
 
 const stripePromise = loadStripe('pk_test_51PgYz3CD9TYzROTCOsurapFheYpYoil9ZunZ3M5qOcmPwtmDJm5rvCYA7EzIrrbR7G7M4VZbTt5kZogkTdMwG9jV00cAwnjVNd');
 
+import FeaturedProduct from './components/FeaturedProduct';
+import ProductsPage from './pages/ProductsPage';
+import ProductList from './components/ProductList';
+// import Cart from './pages/Cart';
+
+import ProductForm from './components/ProductForm';
+import CategoryForm from './components/CategoryForm';
+import CategoryList from './components/CategoryList';
+import Sellers from './components/Sellers';
 
 function App() {
   const [message, setMessage] = useState("");
@@ -44,15 +53,18 @@ function App() {
         <div>
           <Header />
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            {/* <Route path="/products" element={<ProductsPage />} />
-            <Route path="/product/:id" element={<ProductDetails />} /> */}
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/success" element={<Success />} />
-            <Route path="/canceled" element={<Cancel />} />
-          </Routes>
+        <Route path ="/" element={<HomePage />} />
+        <Route path="/products" element={<ProductList />}/>
+        <Route path="/newProduct" element={<ProductForm />}/>
+        <Route path="/allProducts" element={<ProductList />}/>
+        <Route path="/sellers" element={<Sellers />}/>
+        <Route path="/allCategories" element={<CategoryList />}/>
+        <Route path="/newCategory" element={<CategoryForm />}/>
+        {/* <Route path="/product/:id" element={<ProductDetails />} /> */}
+        <Route path="/cart" element={<Cart />} /> 
+        <Route path="/login" element={<LoginPage/>} />
+        <Route path="/register" element={<RegisterPage/>}/> 
+      </Routes>
           <Footer />
         </div>
 

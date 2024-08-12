@@ -79,7 +79,7 @@ const FeaturedProduct = () => {
     id: 1, // Unique ID for the product
     name: "Matt Brewer hammered silver necklace",
     price: 20.00,
-    image: "src/assets/matt-brewer_hammered-silver-necklace.png",
+    image: "src/assets/img/product/necklace1.jpg"
   };
 
   const handleAddToCart = (e) => {

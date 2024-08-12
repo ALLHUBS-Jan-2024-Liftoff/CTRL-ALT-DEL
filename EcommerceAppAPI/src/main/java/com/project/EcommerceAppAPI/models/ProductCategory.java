@@ -1,6 +1,7 @@
 package com.project.EcommerceAppAPI.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 public class ProductCategory extends AbstractProducts{
     @OneToMany(mappedBy = "productCategory")
+    @JsonBackReference
     private List<Product> products = new ArrayList<>();
 
     public ProductCategory(List<Product> products) {
