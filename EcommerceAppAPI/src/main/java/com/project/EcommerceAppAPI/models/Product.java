@@ -38,10 +38,13 @@ public class Product extends AbstractProducts{
         this.productCategory = productCategory;
     }
 
-//    @Override
-//    public String toString() {
-//        return "AllProducts{" +
-////                "productCategory=" + productCategory +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Product {" +
+                "name=" + getName() +
+                ", description=" + getDescription() +
+                ", price=" + price +
+                ", categoryName=" + productCategory.getName() +
+                '}';
+    }
 }
