@@ -9,11 +9,11 @@ import jakarta.validation.constraints.NotNull;
 public class User {
     @Id
     @GeneratedValue
+    private int id;
     @NotNull
     private String username;
     @NotNull
     private String pwdHash;
-    private int id;
 
     private String firstName;
 

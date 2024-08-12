@@ -85,6 +85,7 @@ public class AuthenticationController {
         return response;
     }
 
+
     @PostMapping("/login")
     public ResponseEntity<Map> processLoginForm(@RequestBody LoginFormDTO loginFormDTO, HttpServletRequest request) {
 
@@ -113,7 +114,7 @@ public class AuthenticationController {
         return  response;
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public String logout(HttpServletRequest request){
         request.getSession().invalidate();
         return "redirect:/login";
