@@ -1,12 +1,13 @@
+
 import React from 'react';
 
 const Success = () => {
-  return (
-    <div>
-      <h1>Thank you for your purchase!</h1>
-      <p>Your order has been successfully placed.</p>
-    </div>
-  );
+    return (
+        <div>
+            <h1>Payment Successful</h1>
+            <p>Thank you for your purchase!</p>
+        </div>
+    );
 };
 
 export default Success;
