@@ -51,6 +51,12 @@ public class ProductController {
         return savedProductDTO;
     }
 
+    @GetMapping("/search")
+    public List<Product> searchProducts(@RequestParam("name") String name) {
+        System.out.println("name "+ name);
+        return productRepository.findByNameContainingIgnoreCase(name);
+    }
+
     @PostMapping("/update")
     public ProductDTO updateProduct(@RequestBody ProductDTO productDTO){
         Optional<Product> optionalProduct = productRepository.findById(productDTO.getId());
