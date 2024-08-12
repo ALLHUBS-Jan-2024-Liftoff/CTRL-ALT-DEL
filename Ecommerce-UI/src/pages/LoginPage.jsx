@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../services/axiosService';
 
 
 const LoginPage = () => {
+
+  
 
   const [formData, setFormData] = useState({
     username: "",
@@ -10,6 +13,7 @@ const LoginPage = () => {
   });
 
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -21,6 +25,10 @@ const LoginPage = () => {
     try{
       const response = await axiosInstance.post('/login', formData);
       setMessage(response.data.message);
+      if (response.status === 201) {
+        localStorage.setItem('loggedIn', true);
+        navigate('/HomePage');
+      }
     } catch (error) {
     if(error.response) {
        setMessage(error.response.data.message);
@@ -29,6 +37,8 @@ const LoginPage = () => {
     }
     }
   };
+
+  
 
   return (
     <div>

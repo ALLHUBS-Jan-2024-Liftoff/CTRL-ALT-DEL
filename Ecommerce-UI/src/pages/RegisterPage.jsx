@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from "../services/axiosService";
 
 const RegisterPage = () => {
@@ -13,6 +14,7 @@ const RegisterPage = () => {
   });
 
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -23,6 +25,9 @@ const RegisterPage = () => {
     event.preventDefault();
     try{
       const response = await axiosInstance.post('/register', formData);
+      if (response.status === 201) {
+        navigate('/login');
+      }
     } catch (error) {
     if(error.response) {
        setMessage(error.response.data.message);
