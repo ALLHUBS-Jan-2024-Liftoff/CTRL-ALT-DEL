@@ -33,10 +33,12 @@ public class ProductCategoryController {
             return null;
         }
     }
+
     @PostMapping("/delete")
     public void deleteCategory (@RequestParam int categoryId) {
         productCategoryRepository.deleteById(categoryId);
     }
+
 
     @PostMapping("/update")
     public ProductCategory updateProductCategory(@RequestBody ProductCategory productCategory){

@@ -24,5 +24,6 @@ export const deleteProduct = (id) => {
         }
     };
 
-export default axiosInstance;
+
+    export default axiosInstance;
 

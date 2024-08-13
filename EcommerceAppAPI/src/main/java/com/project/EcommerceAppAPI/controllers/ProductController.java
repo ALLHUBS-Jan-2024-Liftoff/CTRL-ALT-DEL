@@ -52,8 +52,7 @@ public class ProductController {
     public ProductDTO createProduct(@RequestBody ProductDTO productDTO){
         Product product = convertToProduct(productDTO);
         Product savedProduct =  productRepository.save(product);
-        ProductDTO savedProductDTO = convertToDto(savedProduct);
-        return savedProductDTO;
+        return convertToDto(savedProduct);
     }
 
     @PostMapping("/update")

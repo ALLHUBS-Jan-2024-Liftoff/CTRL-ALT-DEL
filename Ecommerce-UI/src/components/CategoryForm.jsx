@@ -67,7 +67,6 @@ const CategoryForm = () => {
                     required
                 />
             </div>
-            
             <div className="form-control">
                 <button type="submit" className="btn btn-primary">Save</button>
                 <button type="button" onClick={handelCancel} className="btn btn-primary">Cancel</button>

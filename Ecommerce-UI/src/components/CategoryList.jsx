@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getCategories } from '../services/axiosService';
 
-const CategoryList = ({ onEdit }) => {
+const CategoryList = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {

@@ -30,7 +30,6 @@ const ManageProducts = () => {
         }
     };
 
-
     return (
         <div>
             <h2>All Products</h2>
@@ -62,5 +61,6 @@ const ManageProducts = () => {
         </div>
     );
 };
+
 
 export default ManageProducts;

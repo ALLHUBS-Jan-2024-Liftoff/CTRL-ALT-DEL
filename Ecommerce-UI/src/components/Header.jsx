@@ -11,7 +11,7 @@ const Header = () => {
     try {
         await axiosInstance.post('/logout');
         localStorage.setItem('loggedIn', false);
-        navigate('/login'); // Redirect to login page
+        navigate('/login');
     } catch (error) {
         console.error("Logout failed", error);
     }

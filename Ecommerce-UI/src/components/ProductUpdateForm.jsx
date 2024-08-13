@@ -33,7 +33,6 @@ const ProductUpdateForm = () => {
         try{
             await updateProduct(product);
             setSuccess(true);
-            // navigate('/');
         }
         catch (error) {
             console.error('Error updating product:', error);
