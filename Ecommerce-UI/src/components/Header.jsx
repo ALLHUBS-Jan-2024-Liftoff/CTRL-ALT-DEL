@@ -11,7 +11,7 @@ const Header = () => {
     try {
         await axiosInstance.post('/logout');
         localStorage.setItem('loggedIn', false);
-        navigate('/login'); // Redirect to login page
+        navigate('/login');
     } catch (error) {
         console.error("Logout failed", error);
     }
@@ -26,7 +26,7 @@ const Header = () => {
       <nav className="navigation">
         <ul className="nav-list">
           <li><Link to ="/products">Shop</Link></li>
-          <li><Link to ="/createProduct">Sellers</Link></li>
+          <li><Link to ="/sellers">Sellers</Link></li>
           <li><Link to ="/about">About</Link></li>
           <li>{localStorage.getItem('loggedIn') === 'true' ? (
               <Link onClick={handleLogout}>Logout</Link>

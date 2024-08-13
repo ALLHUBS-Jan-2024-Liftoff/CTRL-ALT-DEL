@@ -3,7 +3,7 @@ import ProductList from './../components/ProductList';
 import ProductForm from './../components/ProductForm';
 
 
-const ProductsPage = () => {
+  const ProductsPage = () => {
   const [currentProduct, setCurrentProduct] = useState(null);
   const [isFormVisible, setIsFormVisible] = useState(false);
 
