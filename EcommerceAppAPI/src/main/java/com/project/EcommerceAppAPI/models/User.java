@@ -9,19 +9,28 @@ import jakarta.validation.constraints.NotNull;
 public class User {
     @Id
     @GeneratedValue
+    private int id;
     @NotNull
     private String username;
     @NotNull
     private String pwdHash;
-    private int id;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String email;
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public User() {}
 
-    public User(String username, String password) {
+    public User(String username, String password, String email, String firstName, String lastName) {
         this.username = username;
         this.pwdHash = encoder.encode(password);
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
 
@@ -29,18 +38,9 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public boolean isMatchingPassword(String password) {
+        return encoder.matches(password, pwdHash);
     }
-
-    public String getPwdHash() {
-        return pwdHash;
-    }
-
-    public void setPwdHash(String pwdHash) {
-        this.pwdHash = pwdHash;
-    }
-
     public int getId() {
         return id;
     }
@@ -48,8 +48,29 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
-    public boolean isMatchingPassword(String password) {
-        return encoder.matches(password, pwdHash);
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }
