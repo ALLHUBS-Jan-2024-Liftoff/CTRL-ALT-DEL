@@ -1,9 +1,8 @@
-// src/components/ProductForm.jsx
 import React, { useState, useEffect } from 'react';
 import { createCategory, updateCategory } from '../services/axiosService';
 
 
-const CategoryForm = ({ currentCategory, onSave}) => {
+const CategoryForm = () => {
     const [success, setSuccess] = useState(false);
     const [category, setCategory] = useState({
         name: '',
@@ -11,14 +10,14 @@ const CategoryForm = ({ currentCategory, onSave}) => {
     });
 
     useEffect(() => {
-        if (currentCategory) {
-            setCategory(currentCategory);
+        if (category) {
+            setCategory(category);
         }
-    }, [currentCategory]);
+    }, [category]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setCategory({ ...product, [name]: value });
+        setCategory({ ...category, [name]: value });
     };
 
     const handleSubmit = async (e) => {
@@ -35,12 +34,11 @@ const CategoryForm = ({ currentCategory, onSave}) => {
                 setSuccess(false);
             }
         }
-        onSave();
     };
 
     const handelCancel = () => {
         if (window.confirm('Are you sure you want to cancel? This will clear all fields.')) {
-            setcategory({
+            setCategory({
                 name: '',
                 description: '',
             });
