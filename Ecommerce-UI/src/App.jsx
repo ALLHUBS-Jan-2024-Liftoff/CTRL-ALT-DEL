@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { CartProvider } from './context/CartContext.jsx';
+// import { CartProvider } from './context/CartContext.jsx';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
@@ -11,8 +11,8 @@ import HomePage from './pages/HomePage';
 import Cart from './pages/Cart';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import Success from './pages/Success'; 
-import Cancel from './pages/Cancel'; 
+// import Success from './pages/Success';
+// import Cancel from './pages/Cancel';
 // import ProductDetails from './pages/ProductDetails'; // Assuming this is a page component
 import './App.css';
 
@@ -47,8 +47,6 @@ function App() {
   }, []);
 
   return (
-    <CartProvider>
-    <Elements stripe={stripePromise}>
       <Router>
         <div>
           <Header />
@@ -71,8 +69,6 @@ function App() {
         {/* Render the checkout message or product display
         {message ? <Message message={message} /> : <ProductDisplay />} */}
       </Router>
-    </Elements>
-    </CartProvider>
   );
 }
 
