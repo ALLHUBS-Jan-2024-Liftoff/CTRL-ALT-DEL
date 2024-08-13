@@ -23,12 +23,6 @@ public class ProductCategory extends AbstractProducts{
     public ProductCategory() {
     }
 
-//    public ProductCategory(int id, String name, String description) {
-//        this.setId(id);
-//        this.setName(name);
-//        this.setDescription(description);
-//    }
-
     public List<Product> getProducts() {
         return products;
     }
@@ -36,5 +30,4 @@ public class ProductCategory extends AbstractProducts{
     public void setProducts(List<Product> products) {
         this.products = products;
     }
-
 }

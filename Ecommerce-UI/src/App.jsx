@@ -27,8 +27,6 @@ import ProductForm from './components/ProductForm';
 import CategoryForm from './components/CategoryForm';
 import CategoryList from './components/CategoryList';
 import Sellers from './components/Sellers';
-import ManageProducts from './components/ManageProducts';
-import ProductUpdateForm from './components/ProductUpdateForm';
 
 function App() {
   const [message, setMessage] = useState("");
@@ -58,17 +56,12 @@ function App() {
         <Route path ="/" element={<HomePage />} />
         <Route path="/products" element={<ProductList />}/>
         <Route path="/newProduct" element={<ProductForm />}/>
-        <Route path="/manageProducts" element={<ManageProducts />}/>
-        <Route path="/updateProduct/:id" element={<ProductUpdateForm />}/>
+        <Route path="/allProducts" element={<ProductList />}/>
         <Route path="/sellers" element={<Sellers />}/>
-        <Route path="/listCategories" element={<CategoryList />}/>
+        <Route path="/allCategories" element={<CategoryList />}/>
         <Route path="/newCategory" element={<CategoryForm />}/>
-
-        {/* <Route path="/cart" element={Cart}/> */}
-
         {/* <Route path="/product/:id" element={<ProductDetails />} /> */}
         <Route path="/cart" element={<Cart />} /> 
-
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/register" element={<RegisterPage/>}/> 
       </Routes>
