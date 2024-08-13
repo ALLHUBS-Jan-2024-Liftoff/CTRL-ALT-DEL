@@ -13,13 +13,13 @@ const Sellers = () => {
                     <li><Link to ="/newProduct">Create a product</Link></li>
                 </tr>
                 <tr>
-                    <li><Link to ="/manageProducts">Manage Products</Link></li>
-                </tr>
-                <tr>
                     <li><Link to ="/newCategory">Create a category</Link></li>
                 </tr>
                 <tr>
-                    <li><Link to ="/listCategories">List Categories</Link></li>
+                    <li><Link to ="/allProducts">List Products</Link></li>
+                </tr>
+                <tr>
+                    <li><Link to ="/allCategories">List Categories</Link></li>
                 </tr>        
             </table>
           </ul>

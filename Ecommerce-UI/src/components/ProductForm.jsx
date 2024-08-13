@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { createProduct, updateProduct } from '../services/axiosService';
 
 
-const ProductForm = ({ currentProduct }) => {
+const ProductForm = ({ currentProduct, onSave}) => {
     const [success, setSuccess] = useState(false);
     const [product, setProduct] = useState({
         name: '',
@@ -37,6 +37,7 @@ const ProductForm = ({ currentProduct }) => {
                 setSuccess(false);
             }
         }
+        onSave();
     };
 
     const handelCancel = () => {
@@ -62,7 +63,7 @@ const ProductForm = ({ currentProduct }) => {
                     required
                 />
             </div>
-            <div className="mt-2">
+            <div >
                 <label className="form-label">Description</label>
                 <input
                     type="text"
@@ -72,7 +73,7 @@ const ProductForm = ({ currentProduct }) => {
                     required
                 />
             </div>
-            <div className="mt-2">
+            <div>
                 <label className="form-label">Price</label>
                 <input
                     type="number"
@@ -82,7 +83,7 @@ const ProductForm = ({ currentProduct }) => {
                     required
                 />
             </div>
-            <div className="mt-2">
+            <div >
                 <label className="form-label">Category ID</label>
                 <input
                     type="number"
@@ -92,7 +93,7 @@ const ProductForm = ({ currentProduct }) => {
                     required
                 />
             </div>
-            <div className="mt-4">
+            <div className="form-control">
                 <button type="submit" className="btn btn-primary">Save</button>
                 <button type="button" onClick={handelCancel} className="btn btn-primary">Cancel</button>
                 {success && <p>Product created successfully!</p>}
