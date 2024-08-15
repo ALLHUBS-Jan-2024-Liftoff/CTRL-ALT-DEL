@@ -38,7 +38,7 @@ public class ProductController {
     }
 
     @PutMapping("/{productID}")
-    public ProductDTO fetchAProduct(@PathVariable int productID) {
+    public ProductDTO fetchAProduct(@PathVariable Long productID) {
         Optional<Product> optionalProduct = productRepository.findById(productID);
         if (optionalProduct.isPresent()){
             Product product = optionalProduct.orElse(null);
@@ -53,6 +53,23 @@ public class ProductController {
         Product product = convertToProduct(productDTO);
         Product savedProduct =  productRepository.save(product);
         return convertToDto(savedProduct);
+    }
+
+    @GetMapping("/search")
+    public List<ProductDTO> searchProducts(@RequestParam("name") String name) {
+       List<Product> products = productRepository.findByNameContainingIgnoreCase(name);
+        List<ProductDTO> productDTOs = new ArrayList<>();
+        for(Product product : products) {
+            ProductDTO productDTO = new ProductDTO();
+            productDTO.setId(product.getId());
+            productDTO.setName(product.getName());
+            productDTO.setDescription(product.getDescription());
+            productDTO.setPrice(product.getPrice());
+            productDTO.setCategoryId(product.getProductCategory().getId());
+            System.out.println(productDTO);
+            productDTOs.add(productDTO);
+        }
+        return productDTOs;
     }
 
     @PostMapping("/update")
@@ -76,7 +93,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete")
-    public void deleteProduct(@RequestParam("productId") int productId) {
+    public void deleteProduct(@RequestParam("productId") Long productId) {
         productRepository.deleteById(productId);
     }
 
