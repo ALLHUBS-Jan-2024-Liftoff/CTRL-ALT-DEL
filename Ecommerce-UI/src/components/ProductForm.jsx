@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { createProduct, updateProduct } from '../services/axiosService';
+import { createProduct, updateProduct, getCategories } from '../services/axiosService';
 
 
-const ProductForm = ({ currentProduct, onSave}) => {
+const ProductForm = ({ currentProduct }) => {
     const [success, setSuccess] = useState(false);
+    const [categories, setCategories] = useState([]);
     const [product, setProduct] = useState({
         name: '',
         description: '',
@@ -12,16 +13,34 @@ const ProductForm = ({ currentProduct, onSave}) => {
     });
 
     useEffect(() => {
+        setSuccess(false);
+        fetchCategories();
         if (currentProduct) {
             setProduct(currentProduct);
         }
     }, [currentProduct]);
 
+    const fetchCategories = async () => {
+        try {
+            const response = await getCategories();
+            setCategories(response.data);
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
+    };
+
     const handleChange = (e) => {
+        // setSuccess(false);
         const { name, value } = e.target;
         setProduct({ ...product, [name]: value });
     };
 
+    const handleCategoryChange = (e) => {
+        // setSuccess(false);
+        const selectedCategoryId = e.target.value;
+        setProduct({ ...product, categoryId: selectedCategoryId });
+    };
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (product.id) {
@@ -36,10 +55,11 @@ const ProductForm = ({ currentProduct, onSave}) => {
                 setSuccess(false);
             }
         }
-        onSave();
+        
     };
 
     const handelCancel = () => {
+        setSuccess(false);
         if (window.confirm('Are you sure you want to cancel? This will clear all fields.')) {
             setProduct({
                 name: '',
@@ -83,14 +103,28 @@ const ProductForm = ({ currentProduct, onSave}) => {
                 />
             </div>
             <div >
-                <label className="form-label">Category ID</label>
+                {/* <label className="form-label">Category ID</label>
                 <input
                     type="number"
                     name="categoryId"
                     value={product.categoryId}
                     onChange={handleChange}
                     required
-                />
+                /> */}
+                <label className="form-label">Category</label>
+                <select
+                    name="categoryId"
+                    value={product.categoryId}
+                    onChange={handleCategoryChange}
+                    required
+                >
+                    <option value="">Select a category</option>
+                    {categories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                            {category.name}
+                        </option>
+                    ))}
+                </select>
             </div>
             <div className="form-control">
                 <button type="submit" className="btn btn-primary">Save</button>

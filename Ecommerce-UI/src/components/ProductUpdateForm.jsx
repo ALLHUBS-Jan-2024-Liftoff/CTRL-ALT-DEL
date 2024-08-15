@@ -4,8 +4,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const ProductUpdateForm = () => {
     const { id } = useParams();
-    const navigate = useNavigate();
-    console.log("ProductUpdateForm: Product id "+id);
+    // const navigate = useNavigate();
+    // console.log("ProductUpdateForm: Product id "+id);
     const [success, setSuccess] = useState(false);
     const [product, setProduct] = useState({
         name: '',
