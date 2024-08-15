@@ -5,7 +5,7 @@ public class ProductDTO {
     private String name;
     private String description;
     private int price;
-    private int categoryId;
+    private Long categoryId;
 
     public String getName() {
         return name;
@@ -31,11 +31,11 @@ public class ProductDTO {
         this.price = price;
     }
 
-    public int getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 }
