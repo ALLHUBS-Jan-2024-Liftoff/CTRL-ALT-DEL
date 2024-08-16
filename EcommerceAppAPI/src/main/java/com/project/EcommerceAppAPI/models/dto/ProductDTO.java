@@ -33,11 +33,11 @@ public class ProductDTO {
         this.description = description;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -48,4 +48,19 @@ public class ProductDTO {
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
+
+}
+
+
+    @Override
+    public String toString() {
+        return "ProductDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+//                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", categoryId=" + categoryId +
+                '}';
+    }
+
 }

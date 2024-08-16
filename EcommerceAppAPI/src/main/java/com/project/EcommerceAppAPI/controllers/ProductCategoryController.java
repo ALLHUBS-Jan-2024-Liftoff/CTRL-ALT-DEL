@@ -38,8 +38,6 @@ public class ProductCategoryController {
     public void deleteCategory (@RequestParam Long categoryId) {
         productCategoryRepository.deleteById(categoryId);
     }
-
-
     @PostMapping("/update")
     public ProductCategory updateProductCategory(@RequestBody ProductCategory productCategory){
         Optional<ProductCategory> optionalCategory = productCategoryRepository.findById(productCategory.getId());

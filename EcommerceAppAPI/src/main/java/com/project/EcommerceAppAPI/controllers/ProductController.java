@@ -55,6 +55,23 @@ public class ProductController {
         return convertToDto(savedProduct);
     }
 
+    @GetMapping("/search")
+    public List<ProductDTO> searchProducts(@RequestParam("name") String name) {
+       List<Product> products = productRepository.findByNameContainingIgnoreCase(name);
+        List<ProductDTO> productDTOs = new ArrayList<>();
+        for(Product product : products) {
+            ProductDTO productDTO = new ProductDTO();
+            productDTO.setId(product.getId());
+            productDTO.setName(product.getName());
+            productDTO.setDescription(product.getDescription());
+            productDTO.setPrice(product.getPrice());
+            productDTO.setCategoryId(product.getProductCategory().getId());
+            System.out.println(productDTO);
+            productDTOs.add(productDTO);
+        }
+        return productDTOs;
+    }
+
     @PostMapping("/update")
     public ProductDTO updateProduct(@RequestBody ProductDTO productDTO){
         Optional<Product> optionalProduct = productRepository.findById(productDTO.getId());
@@ -89,10 +106,8 @@ public class ProductController {
         productDTO.setCategoryId(product.getProductCategory().getId());
         return productDTO;
     }
-
     private Product convertToProduct(ProductDTO productDTO){
         Product product = new Product();
-
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
@@ -101,4 +116,5 @@ public class ProductController {
         product.setProductCategory(productCategory);
         return product;
     }
+
 }

@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Product extends AbstractProducts{
-    private int price;
+    private double price;
 
     @NotNull(message = "Category is required")
     @ManyToOne
@@ -22,11 +22,11 @@ public class Product extends AbstractProducts{
     public Product() {
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -38,10 +38,12 @@ public class Product extends AbstractProducts{
         this.productCategory = productCategory;
     }
 
-//    @Override
-//    public String toString() {
-//        return "AllProducts{" +
-////                "productCategory=" + productCategory +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "{" +
+                "name=" + this.getName() +
+                "price=" + this.getPrice() +
+                '}';
+    }
+
 }

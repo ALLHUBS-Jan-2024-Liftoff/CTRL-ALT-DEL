@@ -25,8 +25,8 @@ export const deleteProduct = (id) => {
         } catch(error){
             console.log(error);
         }
-    };
+};
+export const searchProducts = (searchTerm) => axios.get(`${API_URL}/product/search?name=${searchTerm}`);
 
 
-    export default axiosInstance;
-
+export default axiosInstance;

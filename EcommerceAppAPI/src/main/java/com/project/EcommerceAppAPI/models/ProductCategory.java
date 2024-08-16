@@ -19,7 +19,6 @@ public class ProductCategory extends AbstractProducts{
     public ProductCategory(List<Product> products) {
         this.products = products;
     }
-
     public ProductCategory() {
     }
 

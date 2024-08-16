@@ -16,13 +16,17 @@ import ManageProducts from "./components/ManageProducts";
 import ProductUpdateForm from "./components/ProductUpdateForm";
 import SuccessPage from './pages/SuccessPage';
 import CancelPage from './pages/CancelPage';
+import SearchProduct from "./components/SearchProduct";
+
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
-
+  
   const handleAddToCart = (product) => {
     setCartItems((prevCart) => [...prevCart, product]);
   };
+
+
 
   return (
     <Router>
@@ -38,6 +42,7 @@ function App() {
           <Route path="/listCategories" element={<CategoryList />} />
           <Route path="/newCategory" element={<CategoryForm />} />
           <Route path="/cart" element={<Cart cartItems={cartItems} />} />
+           <Route path="/search" element={<SearchProduct />}/>
           <Route path="/checkout" element={<CheckoutForm cartItems={cartItems} />} />
           <Route path="/success" element={<SuccessPage />} />
           <Route path="/cancel" element={<CancelPage />} />
