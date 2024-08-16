@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import ProductList from './../components/ProductList';
 import ProductForm from './../components/ProductForm';
 
-
-  const ProductsPage = () => {
+const ProductsPage = ({ onAddToCart }) => {
   const [currentProduct, setCurrentProduct] = useState(null);
   const [isFormVisible, setIsFormVisible] = useState(false);
 
@@ -34,13 +33,12 @@ import ProductForm from './../components/ProductForm';
               ) : (
                   <div>
                       <button onClick={() => setIsFormVisible(true)}>Add Product</button>
-                      <ProductList onEdit={handleEdit} />
+                      <ProductList onEdit={handleEdit} onAddToCart={onAddToCart} />
                   </div>
               )}
           </main>
       </div>
   );
 };
-
 
 export default ProductsPage;

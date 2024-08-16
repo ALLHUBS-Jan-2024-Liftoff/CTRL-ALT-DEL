@@ -51,6 +51,7 @@ const handleSearch = (e) => {
               <Link onClick={handleLogout}>Logout</Link>
                  ) : (<Link to="/login">Login</Link>)}
           </li>
+          <li><Link to ="/cart">Cart</Link></li>
         </ul>
       </nav>
   

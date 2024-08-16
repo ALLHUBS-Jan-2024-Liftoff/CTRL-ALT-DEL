@@ -158,3 +158,41 @@ footer {
   gap: 1rem;
   margin-top: 1rem;
 } */
+
+/* src/App.css */
+.success-page, .cancel-page {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.success-page h1, .cancel-page h1 {
+  color: #4CAF50;
+}
+
+.cancel-page h1 {
+  color: #f44336;
+}
+
+.btn {
+  margin: 20px;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
