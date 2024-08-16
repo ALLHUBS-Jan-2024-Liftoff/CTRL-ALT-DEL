@@ -2,31 +2,32 @@ package com.project.EcommerceAppAPI.controllers;
 
 public class ChargeRequest {
 
-    private String paymentMethodId;
+    private Long amount; // Amount in cents
+    private String currency; // Currency code (e.g., "usd")
+    private String paymentMethodId; // Payment method ID from Stripe
 
-    // Default constructor (required for deserialization)
-    public ChargeRequest() {
+    // Getters and Setters
+    public Long getAmount() {
+        return amount;
     }
 
-    // Parameterized constructor
-    public ChargeRequest(String paymentMethodId) {
-        this.paymentMethodId = paymentMethodId;
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 
-    // Getter for paymentMethodId
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     public String getPaymentMethodId() {
         return paymentMethodId;
     }
 
-    // Setter for paymentMethodId
     public void setPaymentMethodId(String paymentMethodId) {
         this.paymentMethodId = paymentMethodId;
-    }
-
-    @Override
-    public String toString() {
-        return "ChargeRequest{" +
-                "paymentMethodId='" + paymentMethodId + '\'' +
-                '}';
     }
 }

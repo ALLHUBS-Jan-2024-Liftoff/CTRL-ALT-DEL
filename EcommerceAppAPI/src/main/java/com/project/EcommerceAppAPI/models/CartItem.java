@@ -19,6 +19,15 @@ public class CartItem {
 
     private int quantity;
 
+    // Default constructor
+    public CartItem() {}
+
+    // Constructor to create CartItem with product and quantity
+    public CartItem(Product product, int quantity) {
+        this.product = product;
+        this.quantity = quantity;
+    }
+
     // Getters and setters
     public Long getId() {
         return id;

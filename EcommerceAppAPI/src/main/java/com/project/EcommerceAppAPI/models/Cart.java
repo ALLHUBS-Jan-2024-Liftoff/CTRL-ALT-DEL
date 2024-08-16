@@ -3,6 +3,7 @@ package com.project.EcommerceAppAPI.models;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 public class Cart {
@@ -17,7 +18,10 @@ public class Cart {
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> items = new ArrayList<>();
 
+    public Cart() {} // Default constructor
+
     public Cart(Long userId) {
+        this.userId = userId;
     }
 
     // Getters and setters
@@ -51,20 +55,17 @@ public class Cart {
         cartItem.setCart(this); // Ensure the bidirectional relationship is maintained
     }
 
-    // Method to get a CartItem by its index
-    public CartItem getCartItem(int index) {
-        if (index >= 0 && index < items.size()) {
-            return items.get(index);
-        }
-        return null;
+    // Method to get a CartItem by product ID
+    public CartItem getCartItem(Long productId) {
+        return items.stream()
+                .filter(item -> item.getProduct().getId().equals(productId))
+                .findFirst()
+                .orElse(null);
     }
 
-    // Method to remove a CartItem by its index
-    public void removeCartItem(int index) {
-        if (index >= 0 && index < items.size()) {
-            CartItem cartItem = items.remove(index);
-            cartItem.setCart(null); // Break the bidirectional relationship
-        }
+    // Method to remove a CartItem by product ID
+    public void removeCartItem(Long productId) {
+        items.removeIf(item -> item.getProduct().getId().equals(productId));
     }
 
     // Method to clear all CartItems from the Cart
