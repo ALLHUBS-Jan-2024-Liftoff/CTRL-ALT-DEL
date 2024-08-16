@@ -38,7 +38,7 @@ public class ProductController {
     }
 
     @PutMapping("/{productID}")
-    public ProductDTO fetchAProduct(@PathVariable int productID) {
+    public ProductDTO fetchAProduct(@PathVariable Long productID) {
         Optional<Product> optionalProduct = productRepository.findById(productID);
         if (optionalProduct.isPresent()){
             Product product = optionalProduct.orElse(null);
@@ -76,7 +76,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete")
-    public void deleteProduct(@RequestParam("productId") int productId) {
+    public void deleteProduct(@RequestParam("productId") Long productId) {
         productRepository.deleteById(productId);
     }
 

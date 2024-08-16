@@ -1,58 +1,15 @@
-// import React from 'react';
-// import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
-// import axios from 'axios';
-
-// const CheckoutForm = () => {
-//   const stripe = useStripe();
-//   const elements = useElements();
-
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-
-//     if (!stripe || !elements) {
-//       // Stripe.js has not yet loaded.
-//       return;
-//     }
-
-//     const { error, paymentMethod } = await stripe.createPaymentMethod({
-//       type: 'card',
-//       card: elements.getElement(CardElement),
-//     });
-
-//     if (error) {
-//       console.error(error);
-//     } else {
-//       // Send paymentMethod.id to your backend
-//       await axios.post('/api/charge', { paymentMethodId: paymentMethod.id });
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <CardElement />
-//       <button type="submit" disabled={!stripe}>
-//         Pay
-//       </button>
-//     </form>
-//   );
-// };
-
-// export default CheckoutForm;
-
 import React from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
+import { createCheckoutSession } from '../services/axiosService';
 
 const stripePromise = loadStripe("pk_test_51PgYz3CD9TYzROTCOsurapFheYpYoil9ZunZ3M5qOcmPwtmDJm5rvCYA7EzIrrbR7G7M4VZbTt5kZogkTdMwG9jV00cAwnjVNd");
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ cartItems }) => {
   const handleCheckout = async () => {
     try {
-      // Call your backend to create the Stripe Checkout session
-      const response = await axios.post("/create-checkout-session");
-      const sessionId = response.data;
+      const response = await createCheckoutSession(cartItems);
+      const sessionId = response.data.sessionId;
 
-      // Redirect to Stripe Checkout
       const stripe = await stripePromise;
       await stripe.redirectToCheckout({ sessionId });
     } catch (error) {
@@ -62,7 +19,7 @@ const CheckoutForm = () => {
 
   return (
     <div>
-      <button onClick={handleCheckout}>
+      <button onClick={handleCheckout} disabled={!cartItems.length}>
         Proceed to Checkout
       </button>
     </div>

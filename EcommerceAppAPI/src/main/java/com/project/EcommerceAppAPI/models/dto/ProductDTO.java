@@ -2,26 +2,18 @@ package com.project.EcommerceAppAPI.models.dto;
 
 public class ProductDTO {
 
-    private int id;
+    private Long id;
     private String name;
     private String description;
     private int price;
     private Long categoryId;
-    private Long id;
+
 
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
         this.id = id;
     }
 
@@ -57,4 +49,3 @@ public class ProductDTO {
         this.categoryId = categoryId;
     }
 }
-
