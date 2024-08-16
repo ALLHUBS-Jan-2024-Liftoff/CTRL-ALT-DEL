@@ -30,8 +30,7 @@ const handleSearch = (e) => {
     <header className="header">
       <div className="logo">Easy ECommerce</div>
       <div className="search-container">
-      {/* <li type="text" className="search-bar"><Link to ="/search">"Start typing to search"</Link></li> */}
-      {/* <input type="text" className="search-bar" placeholder="Start typing to search" /> */}
+        {/* <input type="text" className="search-bar" placeholder="Start typing to search" /> */}
                 <form onSubmit={handleSearch}>
                     <input
                         type="text"
@@ -55,7 +54,7 @@ const handleSearch = (e) => {
         </ul>
       </nav>
   
-      </header>
+    </header>
   );
 };
 

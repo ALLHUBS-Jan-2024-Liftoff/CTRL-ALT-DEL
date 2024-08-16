@@ -30,13 +30,11 @@ const ProductForm = ({ currentProduct }) => {
     };
 
     const handleChange = (e) => {
-        // setSuccess(false);
         const { name, value } = e.target;
         setProduct({ ...product, [name]: value });
     };
 
     const handleCategoryChange = (e) => {
-        // setSuccess(false);
         const selectedCategoryId = e.target.value;
         setProduct({ ...product, categoryId: selectedCategoryId });
     };
@@ -103,14 +101,6 @@ const ProductForm = ({ currentProduct }) => {
                 />
             </div>
             <div >
-                {/* <label className="form-label">Category ID</label>
-                <input
-                    type="number"
-                    name="categoryId"
-                    value={product.categoryId}
-                    onChange={handleChange}
-                    required
-                /> */}
                 <label className="form-label">Category</label>
                 <select
                     name="categoryId"

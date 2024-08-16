@@ -23,7 +23,7 @@ export const deleteProduct = (id) => {
             console.log(error);
         }
 };
-
 export const searchProducts = (searchTerm) => axios.get(`${API_URL}/product/search?name=${searchTerm}`);
+
 
 export default axiosInstance;
