@@ -2,17 +2,17 @@ package com.project.EcommerceAppAPI.models.dto;
 
 public class ProductDTO {
 
-    private int id;
+    private Long id;
     private String name;
     private String description;
-    private int price;
-    private int categoryId;
+    private double price;
+    private Long categoryId;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -32,19 +32,31 @@ public class ProductDTO {
         this.description = description;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public int getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
+
+    @Override
+    public String toString() {
+        return "ProductDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+//                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", categoryId=" + categoryId +
+                '}';
+    }
+
 }

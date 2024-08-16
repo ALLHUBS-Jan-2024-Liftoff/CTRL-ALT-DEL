@@ -25,7 +25,7 @@ public class ProductCategoryController {
     }
 
     @PutMapping("/{categoryID}")
-    public ProductCategory fetchCategory(@PathVariable int categoryID) {
+    public ProductCategory fetchCategory(@PathVariable Long categoryID) {
         Optional<ProductCategory> optionalCategory = productCategoryRepository.findById(categoryID);
         if (optionalCategory.isPresent()){
             return optionalCategory.orElse(null);
@@ -35,11 +35,9 @@ public class ProductCategoryController {
     }
 
     @PostMapping("/delete")
-    public void deleteCategory (@RequestParam int categoryId) {
+    public void deleteCategory (@RequestParam Long categoryId) {
         productCategoryRepository.deleteById(categoryId);
     }
-
-
     @PostMapping("/update")
     public ProductCategory updateProductCategory(@RequestBody ProductCategory productCategory){
         Optional<ProductCategory> optionalCategory = productCategoryRepository.findById(productCategory.getId());

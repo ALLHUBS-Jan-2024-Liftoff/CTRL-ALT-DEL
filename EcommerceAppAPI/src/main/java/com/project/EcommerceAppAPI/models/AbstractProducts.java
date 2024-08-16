@@ -12,8 +12,7 @@ public abstract class AbstractProducts {
 
     @Id
     @GeneratedValue
-    private int id;
-
+    private Long id;
     @NotBlank
     @Size(min = 1, max = 100, message = "Characters must be between 1-100")
     private String name;
@@ -22,7 +21,7 @@ public abstract class AbstractProducts {
     @Size(min = 1, max = 255, message = "Characters must be between 1-255")
     private String description;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 

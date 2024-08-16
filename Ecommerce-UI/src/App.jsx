@@ -4,7 +4,6 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
-// import ProductsPage from './pages/ProductsPage';
 import Cart from './pages/Cart';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -20,6 +19,7 @@ import CategoryList from './components/CategoryList';
 import Sellers from './components/Sellers';
 import ManageProducts from "./components/ManageProducts";
 import ProductUpdateForm from "./components/ProductUpdateForm";
+import SearchProduct from "./components/SearchProduct";
 
 function App() {
 
@@ -36,6 +36,7 @@ function App() {
         <Route path="/sellers" element={<Sellers />}/>
         <Route path="/listCategories" element={<CategoryList />}/>
         <Route path="/newCategory" element={<CategoryForm />}/>
+        <Route path="/search" element={<SearchProduct />}/>
         <Route path="/cart" element={<Cart />} /> 
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/register" element={<RegisterPage/>}/> 
