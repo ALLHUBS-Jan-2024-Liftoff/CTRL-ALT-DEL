@@ -45,4 +45,5 @@ public class Product extends AbstractProducts{
                 "price=" + this.getPrice() +
                 '}';
     }
+
 }

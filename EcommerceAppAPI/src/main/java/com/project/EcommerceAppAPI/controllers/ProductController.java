@@ -106,10 +106,8 @@ public class ProductController {
         productDTO.setCategoryId(product.getProductCategory().getId());
         return productDTO;
     }
-
     private Product convertToProduct(ProductDTO productDTO){
         Product product = new Product();
-
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
@@ -118,4 +116,5 @@ public class ProductController {
         product.setProductCategory(productCategory);
         return product;
     }
+
 }

@@ -13,7 +13,6 @@ public abstract class AbstractProducts {
     @Id
     @GeneratedValue
     private Long id;
-
     @NotBlank
     @Size(min = 1, max = 100, message = "Characters must be between 1-100")
     private String name;
