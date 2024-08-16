@@ -16,11 +16,13 @@ import './App.css';
 import FeaturedProduct from './components/FeaturedProduct';
 import ProductsPage from './pages/ProductsPage';
 import ProductList from './components/ProductList';
+// import Cart from './pages/Cart';
 import ProductForm from './components/ProductForm';
 import CategoryForm from './components/CategoryForm';
 import CategoryList from './components/CategoryList';
 import Sellers from './components/Sellers';
 import ManageProducts from "./components/ManageProducts";
+
 import CheckoutForm from "./components/CheckoutForm";
 
 const stripePromise = loadStripe("pk_test_51PgYz3CD9TYzROTCOsurapFheYpYoil9ZunZ3M5qOcmPwtmDJm5rvCYA7EzIrrbR7G7M4VZbTt5kZogkTdMwG9jV00cAwnjVNd");
@@ -87,6 +89,8 @@ const stripePromise = loadStripe("pk_test_51PgYz3CD9TYzROTCOsurapFheYpYoil9ZunZ3
 //   return null;
 // }
 
+import ProductUpdateForm from "./components/ProductUpdateForm";
+
 
 function App() {
 
@@ -100,13 +104,11 @@ function App() {
         <Route path ="/" element={<HomePage />} />
         <Route path="/products" element={<ProductList />}/>
         <Route path="/newProduct" element={<ProductForm />}/>
-        <Route path="/allProducts" element={<ProductList />}/>
         <Route path="/manageProducts" element={<ManageProducts />}/>
         <Route path="/updateProduct/:id" element={<ProductUpdateForm />}/>
-        <Route path="/listCategories" element={<CategoryList />}/>
         <Route path="/sellers" element={<Sellers />}/>
+        <Route path="/listCategories" element={<CategoryList />}/>
         <Route path="/newCategory" element={<CategoryForm />}/>
-        {/* <Route path="/product/:id" element={<ProductDetails />} /> */}
         <Route path="/cart" element={<Cart />} /> 
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/register" element={<RegisterPage/>}/> 

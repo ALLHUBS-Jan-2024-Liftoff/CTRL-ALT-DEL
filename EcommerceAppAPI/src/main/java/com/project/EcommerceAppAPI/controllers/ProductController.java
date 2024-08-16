@@ -27,6 +27,7 @@ public class ProductController {
         List<ProductDTO> productDTOs = new ArrayList<>();
         for(Product product : products) {
             ProductDTO productDTO = new ProductDTO();
+            productDTO.setId(product.getId());
             productDTO.setName(product.getName());
             productDTO.setDescription(product.getDescription());
             productDTO.setPrice(product.getPrice());
@@ -36,22 +37,68 @@ public class ProductController {
         return productDTOs;
     }
 
+    @PutMapping("/{productID}")
+    public ProductDTO fetchAProduct(@PathVariable int productID) {
+        Optional<Product> optionalProduct = productRepository.findById(productID);
+        if (optionalProduct.isPresent()){
+            Product product = optionalProduct.orElse(null);
+            return convertToDto(product);
+        } else {
+            return null;
+        }
+    }
+
     @PostMapping("/new")
     public ProductDTO createProduct(@RequestBody ProductDTO productDTO){
+        Product product = convertToProduct(productDTO);
+        Product savedProduct =  productRepository.save(product);
+        return convertToDto(savedProduct);
+    }
+
+    @PostMapping("/update")
+    public ProductDTO updateProduct(@RequestBody ProductDTO productDTO){
+        Optional<Product> optionalProduct = productRepository.findById(productDTO.getId());
+
+        Product product = optionalProduct.orElse(null);
+        if(product!=null) {
+            product.setName(productDTO.getName());
+            product.setDescription(productDTO.getDescription());
+            product.setPrice(productDTO.getPrice());
+            Optional<ProductCategory> productCategoryOptional = productCategoryRepository.findById(productDTO.getCategoryId());
+            ProductCategory productCategory = productCategoryOptional.orElse(null);
+            product.setProductCategory(productCategory);
+            Product updatedProduct = productRepository.save(product);
+            ProductDTO updatedDTO = convertToDto(updatedProduct);
+            return updatedDTO;
+        } else {
+            return null;
+        }
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteProduct(@RequestParam("productId") int productId) {
+        productRepository.deleteById(productId);
+    }
+
+    private ProductDTO convertToDto(Product product){
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(product.getId());
+        productDTO.setName(product.getName());
+        productDTO.setDescription(product.getDescription());
+        productDTO.setPrice(product.getPrice());
+        productDTO.setCategoryId(product.getProductCategory().getId());
+        return productDTO;
+    }
+
+    private Product convertToProduct(ProductDTO productDTO){
         Product product = new Product();
+
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
         Optional<ProductCategory> productCategoryOptional = productCategoryRepository.findById(productDTO.getCategoryId());
         ProductCategory productCategory = productCategoryOptional.orElse(null);
         product.setProductCategory(productCategory);
-
-        Product savedProduct =  productRepository.save(product);
-        ProductDTO savedProductDTO = new ProductDTO();
-        savedProductDTO.setName(savedProduct.getName());
-        savedProductDTO.setDescription(savedProduct.getDescription());
-        savedProductDTO.setPrice(savedProduct.getPrice());
-        savedProductDTO.setCategoryId(savedProduct.getProductCategory().getId());
-        return savedProductDTO;
+        return product;
     }
 }
