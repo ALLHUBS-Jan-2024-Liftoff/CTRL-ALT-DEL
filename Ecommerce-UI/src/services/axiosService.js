@@ -8,6 +8,9 @@ const axiosInstance = axios.create({
 });
 
 export const getProducts = () => axios.get(`${API_URL}/product`);
+export const createCheckoutSession = (cartItems) => {
+    return axiosInstance.post('/create-checkout-session', cartItems);
+};
 export const getProductById = (id) => axios.put(`${API_URL}/product/${id}`);
 export const createProduct = (product) => axios.post(`${API_URL}/product/new`, product);
 export const updateProduct = (product) => axios.post(`${API_URL}/product/update`, product);

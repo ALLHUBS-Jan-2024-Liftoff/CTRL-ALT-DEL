@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getProducts, getCategories } from '../services/axiosService';
 
-const ProductList = ({ onEdit }) => {
+const ProductList = ({ onAddToCart }) => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
 
@@ -46,7 +46,9 @@ const ProductList = ({ onEdit }) => {
                             <td>{product.price}</td>
                             <td>{getCategoryNameById(product.categoryId)}</td>
                             <td>
-                                <button onClick={() => onEdit(product)} className="btn btn-primary mt-3">Add to cart</button>
+                                <button onClick={() => onAddToCart(product)} className="btn btn-primary mt-3">
+                                    Add to Cart
+                                </button>
                             </td>
                         </tr>
                     ))}

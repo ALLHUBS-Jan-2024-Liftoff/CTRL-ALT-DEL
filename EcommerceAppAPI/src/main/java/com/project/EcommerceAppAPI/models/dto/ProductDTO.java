@@ -5,8 +5,9 @@ public class ProductDTO {
     private Long id;
     private String name;
     private String description;
-    private double price;
+    private int price;
     private Long categoryId;
+
 
     public Long getId() {
         return id;
@@ -47,6 +48,9 @@ public class ProductDTO {
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
+
+}
+
 
     @Override
     public String toString() {
