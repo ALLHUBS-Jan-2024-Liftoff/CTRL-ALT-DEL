@@ -6,7 +6,7 @@ const SearchProduct = () => {
     const [products, setProducts] = useState([]);
     const query = new URLSearchParams(useLocation().search);
     const searchTerm = query.get('name');
-    console.log("[SearchProducts.jsx]: SearchTerm:", searchTerm);
+    // console.log("[SearchProducts.jsx]: SearchTerm:", searchTerm);
 
     useEffect(() => {
         if (searchTerm) {
@@ -17,14 +17,14 @@ const SearchProduct = () => {
     const fetchProducts = async (searchTerm) => {
         try {
             const response = await searchProducts(searchTerm);
-            console.log("[SearchProduct.jsx]: Response Object:", response);
-            console.log("[SearchProduct.jsx]: Response Data:", response.data);
+            // console.log("[SearchProduct.jsx]: Response Object:", response);
+            // console.log("[SearchProduct.jsx]: Response Data:", response.data);
             setProducts(response.data);
         } catch (error) {
             console.error("[SearchProduct.jsx]: Error fetching products:", error);
             setProducts([]);
         }
-        console.log("[SearchProduct.jsx]: Products:", products);
+        // console.log("[SearchProduct.jsx]: Products:", products);
     };
 
     return (

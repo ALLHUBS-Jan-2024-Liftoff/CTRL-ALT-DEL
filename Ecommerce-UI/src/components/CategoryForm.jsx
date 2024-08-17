@@ -26,8 +26,8 @@ const CategoryForm = () => {
             await updateCategory(category.id, category);
         } else {
             try{
-            await createCategory(category);
-            setSuccess(true);
+                await createCategory(category);
+                setSuccess(true);
             }
             catch (error) {
                 console.error('Error creating category:', error);

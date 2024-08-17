@@ -1,16 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { getProducts } from '../services/axiosService';
+import { getProducts, getCategories } from '../services/axiosService';
 
 const ProductList = ({ onEdit }) => {
     const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         fetchProducts();
+        fetchCategories();
     }, []);
 
     const fetchProducts = async () => {
         const response = await getProducts();
         setProducts(response.data);
+    };
+
+    const fetchCategories = async () => {
+        const response = await getCategories();
+        setCategories(response.data);
+    };
+
+    const getCategoryNameById = (categoryId) => {
+        const category = categories.find(cat => cat.id === categoryId);
+        return category ? category.name : 'Unknown Category';
     };
 
     return (
@@ -22,7 +34,7 @@ const ProductList = ({ onEdit }) => {
                         <th scope="col">Name</th>
                         <th scope="col">Description</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Category ID</th>
+                        <th scope="col">Category</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -32,7 +44,7 @@ const ProductList = ({ onEdit }) => {
                             <td>{product.name}</td>
                             <td>{product.description}</td>
                             <td>{product.price}</td>
-                            <td>{product.categoryId}</td>
+                            <td>{getCategoryNameById(product.categoryId)}</td>
                             <td>
                                 <button onClick={() => onEdit(product)} className="btn btn-primary mt-3">Add to cart</button>
                             </td>

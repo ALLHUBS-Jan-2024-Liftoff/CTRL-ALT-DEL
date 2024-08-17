@@ -15,15 +15,7 @@ export const getCategories = () => axios.get(`${API_URL}/productCategory`);
 export const getCategoryById = (id) => axios.put(`${API_URL}/productCategory/${id}`);
 export const createCategory = (category) => axios.post(`${API_URL}/productCategory/new`, category);
 export const updateCategory = (category) => axios.post(`${API_URL}/productCategory/update`, category);
-export const deleteProduct = (id) => {
-        console.log("Product Id "+id);
-        try{
-            axios.delete(`${API_URL}/product/delete`,{params : {productId : id }});
-        } catch(error){
-            console.log(error);
-        }
-};
+export const deleteProduct = (id) => axios.delete(`${API_URL}/product/delete`,{params : {productId : id }});
 export const searchProducts = (searchTerm) => axios.get(`${API_URL}/product/search?name=${searchTerm}`);
-
 
 export default axiosInstance;
