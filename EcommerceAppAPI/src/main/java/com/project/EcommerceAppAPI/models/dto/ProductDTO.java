@@ -5,7 +5,7 @@ public class ProductDTO {
     private Long id;
     private String name;
     private String description;
-    private int price;
+    private double price;
     private Long categoryId;
 
 
@@ -49,7 +49,7 @@ public class ProductDTO {
         this.categoryId = categoryId;
     }
 
-}
+
 
 
     @Override
