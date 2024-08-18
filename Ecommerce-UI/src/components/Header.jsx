@@ -28,17 +28,20 @@ const handleSearch = (e) => {
 
   return (
     <header className="header">
-      <div className="logo">Easy ECommerce</div>
+      <div className="container-fluid">
+        <div className="d-flex justify-content-between align-items-center">
+      <Link to="/" className="logo">Easy ECommerce</Link>
       <div className="search-container">
         {/* <input type="text" className="search-bar" placeholder="Start typing to search" /> */}
                 <form onSubmit={handleSearch}>
                     <input
                         type="text"
+                        className="search-bar"
                         placeholder="Search products..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    <button type="submit">Search</button>
+                    <button type="submit" className="search-button">Search</button>
                 </form>
             </div>
         
@@ -54,7 +57,8 @@ const handleSearch = (e) => {
           <li><Link to ="/cart">Cart</Link></li>
         </ul>
       </nav>
-  
+      </div>
+      </div>
     </header>
   );
 };
