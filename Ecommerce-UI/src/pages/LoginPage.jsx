@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../services/axiosService';
 
 
-const LoginPage = () => {
+const LoginPage = ({setIsLoggedIn}) => {
 
   
 
@@ -25,7 +25,8 @@ const LoginPage = () => {
     try{
       const response = await axiosInstance.post('/login', formData);
       setMessage(response.data.message);
-      if (response.status === 201) {
+      if (response.status === 200) {
+        setIsLoggedIn(true);
         localStorage.setItem('loggedIn', true);
         navigate('/HomePage');
       }

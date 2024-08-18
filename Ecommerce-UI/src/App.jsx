@@ -21,6 +21,7 @@ import SearchProduct from "./components/SearchProduct";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('loggedIn') === 'true');
   
   const handleAddToCart = (product) => {
     setCartItems((prevCart) => [...prevCart, product]);
@@ -31,7 +32,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Header />
+        <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<ProductsPage onAddToCart={handleAddToCart} />} />
@@ -46,7 +47,7 @@ function App() {
           <Route path="/checkout" element={<CheckoutForm cartItems={cartItems} />} />
           <Route path="/success" element={<SuccessPage />} />
           <Route path="/cancel" element={<CancelPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/register" element={<RegisterPage />} />
         </Routes>
         <Footer />

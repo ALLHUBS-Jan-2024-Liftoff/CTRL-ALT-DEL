@@ -17,6 +17,8 @@ public class RegisterFormDTO extends LoginFormDTO {
     @Email
     private String email;
 
+    private boolean wantToBeSeller = false;
+
     public String getVerifyPassword() {
         return verifyPassword;
     }
@@ -47,5 +49,13 @@ public class RegisterFormDTO extends LoginFormDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isWantToBeSeller() {
+        return wantToBeSeller;
+    }
+
+    public void setWantToBeSeller(boolean wantToBeSeller) {
+        this.wantToBeSeller = wantToBeSeller;
     }
 }

@@ -1,4 +1,5 @@
 package com.project.EcommerceAppAPI.models;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,9 +22,13 @@ public class User {
 
     private String email;
 
+    private boolean isSeller = false;
+    private boolean isVerifiedSeller = false;
+
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public User() {}
+    public User() {
+    }
 
     public User(String username, String password, String email, String firstName, String lastName) {
         this.username = username;
@@ -41,6 +46,7 @@ public class User {
     public boolean isMatchingPassword(String password) {
         return encoder.matches(password, pwdHash);
     }
+
     public int getId() {
         return id;
     }
@@ -73,4 +79,18 @@ public class User {
         this.email = email;
     }
 
+    public boolean isSeller(){
+        return isSeller;
+    }
+    public void setSeller(boolean seller) {
+        isSeller = seller;
+    }
+
+    public boolean isVerifiedSeller() {
+        return isVerifiedSeller;
+    }
+
+    public void setVerifiedSeller(boolean verifiedSeller) {
+        isVerifiedSeller = verifiedSeller;
+    }
 }
