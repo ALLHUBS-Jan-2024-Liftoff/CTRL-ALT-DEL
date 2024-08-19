@@ -30,13 +30,17 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, String email, String firstName, String lastName) {
+    public User(String username,String email, String firstName, int id, String lastName, String password) {
         this.username = username;
-        this.pwdHash = encoder.encode(password);
         this.email = email;
         this.firstName = firstName;
+        this.id = id;
         this.lastName = lastName;
+        this.pwdHash = encoder.encode(password);
+
     }
+
+
 
 
     public String getUsername() {

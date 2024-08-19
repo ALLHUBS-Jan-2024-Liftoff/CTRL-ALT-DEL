@@ -25,7 +25,7 @@ const Header = ({isLoggedIn, setIsLoggedIn}) => {
 
       fetchUserBadge();
     }
-  }, []); 
+  }, [isLoggedIn]); 
 
   const handleLogout = async () => {
     try {
@@ -63,6 +63,12 @@ const Header = ({isLoggedIn, setIsLoggedIn}) => {
 
       <nav className="navigation">
         <ul className="nav-list">
+        {isLoggedIn && userBadge && (
+        <div className="user-badge">
+          <div className="initials">{userBadge.initials}</div>
+          {userBadge.seller && <span className="verified-check">✔️</span>}
+        </div>
+      )}
           <li><Link to="/products">Shop</Link></li>
           <li><Link to="/sellers">Sellers</Link></li>
           <li><Link to="/about">About</Link></li>
@@ -77,12 +83,7 @@ const Header = ({isLoggedIn, setIsLoggedIn}) => {
         </ul>
       </nav>
 
-      {isLoggedIn && userBadge && (
-        <div className="user-badge">
-          <div className="initials">{userBadge.initials}</div>
-          {userBadge.isVerifiedSeller && <span className="verified-check">✔️</span>}
-        </div>
-      )}
+    
     </header>
   );
 };

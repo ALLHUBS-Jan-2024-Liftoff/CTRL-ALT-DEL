@@ -59,10 +59,11 @@ public class AuthenticationController {
                         .body(responseBody);
                 User newUser = new User(
                         registerFormDTO.getUsername(),
-                        registerFormDTO.getPassword(),
+                        registerFormDTO.getEmail(),
                         registerFormDTO.getFirstName(),
+                        registerFormDTO.getId(),
                         registerFormDTO.getLastName(),
-                        registerFormDTO.getEmail()
+                        registerFormDTO.getPassword()
                 );
 
                 if (registerFormDTO.isWantToBeSeller()) {
