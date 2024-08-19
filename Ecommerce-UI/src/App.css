@@ -148,15 +148,30 @@ body {
   margin-bottom: 20px;
 }
 
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 products per row */
+  gap: 16px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
 .card {
   border: 1px solid #BDC3C7;
   border-radius: 10px;
   overflow: hidden;
-  transition: box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
   margin-top: 20px;
 }
 
 .card:hover {
+  transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -251,28 +266,6 @@ body {
   opacity: 0.8;
 }
 
-.card-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 products per row */
-  gap: 16px;
-}
-
-.card {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-}
-
-.card:hover {
-  transform: scale(1.05);
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-
 .product-details-container {
   display: flex;
   flex-direction: row;
@@ -301,3 +294,20 @@ body {
   padding: 20px;
 }
 
+.user-badge {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.user-initials {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.verified-check {
+  color: #1DA1F2; /* Twitter blue color */
+  margin-left: 8px;
+}

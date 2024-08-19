@@ -11,14 +11,18 @@ const RegisterPage = () => {
     firstName: "",
     lastName: "",
     email: "",
+    wantToBeSeller: false,
   });
 
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    const { name, value, type, checked } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   };
 
   const handleSubmit = async (event) => {
@@ -27,6 +31,8 @@ const RegisterPage = () => {
       const response = await axiosInstance.post('/register', formData);
       if (response.status === 201) {
         navigate('/login');
+      }else{
+        console.error('Registration failed', response.data.message);
       }
     } catch (error) {
     if(error.response) {
@@ -99,6 +105,17 @@ return (
           value={formData.email}
           onChange={handleChange}
         />
+        <div>
+          <label htmlFor="wantToBeSeller"> I want to be a retail seller?
+          </label>
+            <input
+              type="checkbox"
+              name="wantToBeSeller"
+              checked={formData.wantToBeSeller}
+              onChange={handleChange}
+            />
+           
+        </div>
       </div>
       <button type="submit">Register</button>
     </form>

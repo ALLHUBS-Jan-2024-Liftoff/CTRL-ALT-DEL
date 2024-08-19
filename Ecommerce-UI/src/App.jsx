@@ -24,7 +24,8 @@ import { CartProvider } from './components/CartProvider';
 function App() {
   const [cartItems, setCartItems] = useState([]);
 
-  // Function to handle adding items to the cart
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('loggedIn') === 'true');
+
   const handleAddToCart = (product) => {
     const existingItem = cartItems.find(item => item.id === product.id);
     if (existingItem) {
@@ -49,6 +50,7 @@ function App() {
   };
 
   return (
+
     <CartProvider>
       <Router>
         <div>
@@ -81,6 +83,7 @@ function App() {
         </div>
       </Router>
     </CartProvider>
+
   );
 }
 

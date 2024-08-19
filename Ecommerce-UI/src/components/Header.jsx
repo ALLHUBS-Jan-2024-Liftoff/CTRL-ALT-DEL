@@ -1,3 +1,4 @@
+
 // import React from 'react';
 // import '../App.css';
 // import { Link } from 'react-router-dom';
@@ -70,8 +71,16 @@ import axiosInstance from '../services/axiosService';
 import { useCart } from '../components/CartProvider'; // Assuming you have a CartProvider
 import './Header.css'
 
-const Header = () => {
+import React, { useState, useEffect } from 'react';
+import '../App.css';
+import { Link, useNavigate } from 'react-router-dom';
+import axiosInstance from '../services/axiosService';
+
+
+const Header = ({isLoggedIn, setIsLoggedIn}) => {
+
   const [searchTerm, setSearchTerm] = useState('');
+
   const navigate = useNavigate();
 
   const { cartItems } = useCart();
@@ -79,20 +88,44 @@ const Header = () => {
   // Calculate the total number of items in the cart
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
+  const [userBadge, setUserBadge] = useState(null);
+ // const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('loggedIn') === 'true');
+
+  const navigate = useNavigate();
+
+  // Fetch user badge info after login
+  useEffect(() => {
+    if (isLoggedIn) {
+      const fetchUserBadge = async () => {
+        try {
+          const response = await axiosInstance.get('/user/badge');
+          setUserBadge(response.data);
+        } catch (error) {
+          console.error("Failed to fetch user badge", error);
+        }
+      };
+
+      fetchUserBadge();
+    }
+  }, [isLoggedIn]); 
+
   const handleLogout = async () => {
     try {
-        await axiosInstance.post('/logout');
-        localStorage.setItem('loggedIn', false);
-        navigate('/login');
+      await axiosInstance.post('/logout');
+      localStorage.setItem('loggedIn', false);
+      setIsLoggedIn(false);
+      setUserBadge(null);  // Clear the badge info when logged out
+      navigate('/login');
     } catch (error) {
-        console.error("Logout failed", error);
+      console.error("Logout failed", error);
     }
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-        navigate(`/search?name=${searchTerm}`);
+      navigate(`/search?name=${searchTerm}`);
+
     }
   };
 
@@ -100,6 +133,7 @@ const Header = () => {
     <header className="header">
       <div className="container-fluid">
         <div className="d-flex justify-content-between align-items-center">
+
           <Link to="/" className="logo">Easy ECommerce</Link>
           <div className="search-container">
             <form onSubmit={handleSearch}>
@@ -140,9 +174,51 @@ const Header = () => {
             </ul>
           </nav>
         </div>
+
+      <Link to="/" className="logo">Easy ECommerce</Link>
+      <div className="search-container">
+        {/* <input type="text" className="search-bar" placeholder="Start typing to search" /> */}
+                <form onSubmit={handleSearch}>
+                    <input
+                        type="text"
+                        className="search-bar"
+                        placeholder="Search products..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <button type="submit" className="search-button">Search</button>
+                </form>
+            </div>
+        
+        <nav className="navigation">
+        <ul className="nav-list">
+        {isLoggedIn && userBadge && (
+        <div className="user-badge">
+          <div className="initials">{userBadge.initials}</div>
+          {userBadge.seller && <span className="verified-check">✔️</span>}
+        </div>
+      )}
+          <li><Link to="/products">Shop</Link></li>
+          <li><Link to="/sellers">Sellers</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li>
+            {isLoggedIn ? (
+              <Link onClick={handleLogout}>Logout</Link>
+            ) : (
+              <Link to="/login">Login</Link>
+            )}
+          </li>
+          <li><Link to="/cart">Cart</Link></li>
+        </ul>
+      </nav>
       </div>
+
+      </div>
+
     </header>
   );
 };
 
 export default Header;
+
+
