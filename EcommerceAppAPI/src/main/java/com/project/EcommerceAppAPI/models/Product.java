@@ -15,7 +15,7 @@ public class Product extends AbstractProducts{
     @JsonBackReference
     private ProductCategory productCategory;
 
-    public Product(int price, ProductCategory productCategory) {
+    public Product(double price, ProductCategory productCategory) {
         this.price = price;
         this.productCategory = productCategory;
     }
