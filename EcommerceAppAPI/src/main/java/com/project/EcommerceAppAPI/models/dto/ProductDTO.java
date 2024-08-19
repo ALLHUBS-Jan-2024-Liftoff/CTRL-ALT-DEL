@@ -52,15 +52,15 @@ public class ProductDTO {
 
 
 
-    @Override
-    public String toString() {
-        return "ProductDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-//                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", categoryId=" + categoryId +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "ProductDTO{" +
+//                "id=" + id +
+//                ", name='" + name + '\'' +
+////                ", description='" + description + '\'' +
+//                ", price=" + price +
+//                ", categoryId=" + categoryId +
+//                '}';
+//    }
 
-}
+
