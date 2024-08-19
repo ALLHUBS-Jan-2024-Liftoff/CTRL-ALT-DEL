@@ -1,10 +1,15 @@
 package com.project.EcommerceAppAPI.models.dto;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
 public class RegisterFormDTO extends LoginFormDTO {
+    @NotNull
+    @GeneratedValue( strategy = GenerationType.AUTO )
+    private int id;
     @NotNull
     @Valid
     private String verifyPassword;
@@ -16,6 +21,8 @@ public class RegisterFormDTO extends LoginFormDTO {
     @Valid
     @Email
     private String email;
+
+    private boolean wantToBeSeller = false;
 
     public String getVerifyPassword() {
         return verifyPassword;
@@ -47,5 +54,21 @@ public class RegisterFormDTO extends LoginFormDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isWantToBeSeller() {
+        return wantToBeSeller;
+    }
+
+    public void setWantToBeSeller(boolean wantToBeSeller) {
+        this.wantToBeSeller = wantToBeSeller;
     }
 }

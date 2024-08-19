@@ -3,6 +3,7 @@ package com.project.EcommerceAppAPI.controllers;
 import com.project.EcommerceAppAPI.models.User;
 import com.project.EcommerceAppAPI.models.dto.LoginFormDTO;
 import com.project.EcommerceAppAPI.models.dto.RegisterFormDTO;
+import com.project.EcommerceAppAPI.models.dto.UserBadgeDTO;
 import com.project.EcommerceAppAPI.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -38,26 +39,39 @@ public class AuthenticationController {
         return user.get();
     }
 
+    //method to set the user in a session
     private static void setUserInSession(HttpSession session, User user) {
         session.setAttribute(userSessionKey, user.getId());
     }
 
-
+    //Registration endpoint
     @PostMapping(value= "/register" )
     public ResponseEntity<Map> processRegistrationForm(@RequestBody RegisterFormDTO registerFormDTO,
                                                        HttpServletRequest request)  {
         ResponseEntity response = null;
         Map<String, String> responseBody = new HashMap<>();
         try{
-            User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
+            User existingUser = userRepository.findByUsername(registerFormDTO.getUsername()); //checks if the user already exists
             if (existingUser == null && !registerFormDTO.getUsername().isEmpty() && !registerFormDTO.getPassword().isEmpty()){
                 responseBody.put("message", "Given user details are successfully registered");
                 response = ResponseEntity
                         .status(HttpStatus.CREATED)
                         .body(responseBody);
-                User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getFirstName(), registerFormDTO.getLastName(), registerFormDTO.getEmail());
-                setUserInSession(request.getSession(), newUser);
+                User newUser = new User(
+                        registerFormDTO.getUsername(),
+                        registerFormDTO.getEmail(),
+                        registerFormDTO.getFirstName(),
+                        registerFormDTO.getId(),
+                        registerFormDTO.getLastName(),
+                        registerFormDTO.getPassword()
+                );
+
+                if (registerFormDTO.isWantToBeSeller()) {
+                    newUser.setSeller(true);
+                }
                 userRepository.save(newUser);
+                setUserInSession(request.getSession(), newUser);
+
             } else if(existingUser != null) {
                 responseBody.put("message", "User Already Exists.");
                 response = ResponseEntity
@@ -74,6 +88,19 @@ public class AuthenticationController {
                         .status(HttpStatus.BAD_REQUEST)
                         .body(responseBody);
             }
+            if (registerFormDTO.getEmail().isEmpty()) {
+                responseBody.put("message", "Email is required.");
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(responseBody);
+            }
+
+            if (registerFormDTO.getFirstName().isEmpty() || registerFormDTO.getLastName().isEmpty()) {
+                responseBody.put("message", "Full name is required.");
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(responseBody);
+            }
         }catch (Exception ex){
             responseBody.put("message", "An exception occurred due to " + ex.getMessage());
             response = ResponseEntity
@@ -83,7 +110,7 @@ public class AuthenticationController {
         return response;
     }
 
-
+    //Login endpoint
     @PostMapping("/login")
     public ResponseEntity<Map> processLoginForm(@RequestBody LoginFormDTO loginFormDTO, HttpServletRequest request) {
 
@@ -106,15 +133,39 @@ public class AuthenticationController {
             responseBody.put("message", "User successfully logged in.");
             responseBody.put("username", theUser.getUsername());
             response = ResponseEntity
-                    .status(HttpStatus.CREATED)
+                    .status(HttpStatus.OK)
                     .body(responseBody);
         }
         return  response;
     }
 
     @PostMapping("/logout")
-    public String logout(HttpServletRequest request){
+    public ResponseEntity<Map<String, String>> logout(HttpServletRequest request) {
         request.getSession().invalidate();
-        return "redirect:/login";
+        Map<String, String> responseBody = new HashMap<>();
+        responseBody.put("message", "User successfully logged out.");
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+    }
+
+    @GetMapping("/user/badge")
+    public ResponseEntity<UserBadgeDTO> getUserBadgeInfo(HttpSession session) {
+        User currentUser = getUserFromSession(session);
+
+        if (currentUser == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        // Create initials by concatenating the first letter of firstName and lastName
+        String initials = currentUser.getFirstName().substring(0, 1).toUpperCase() +
+                currentUser.getLastName().substring(0, 1).toUpperCase();
+
+        // Prepare the UserBadgeDTO
+        UserBadgeDTO userBadgeDTO = new UserBadgeDTO(
+                initials,
+                currentUser.isSeller(),
+                currentUser.isVerifiedSeller()
+        );
+
+        return ResponseEntity.ok(userBadgeDTO);
     }
 }

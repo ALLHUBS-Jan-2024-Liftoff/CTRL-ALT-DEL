@@ -1,30 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../services/axiosService';
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
-const Header = () => {
+const Header = ({isLoggedIn, setIsLoggedIn}) => {
+
   const [searchTerm, setSearchTerm] = useState('');
+  const [userBadge, setUserBadge] = useState(null);
+ // const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('loggedIn') === 'true');
 
   const navigate = useNavigate();
+
+  // Fetch user badge info after login
+  useEffect(() => {
+    if (isLoggedIn) {
+      const fetchUserBadge = async () => {
+        try {
+          const response = await axiosInstance.get('/user/badge');
+          setUserBadge(response.data);
+        } catch (error) {
+          console.error("Failed to fetch user badge", error);
+        }
+      };
+
+      fetchUserBadge();
+    }
+  }, [isLoggedIn]); 
+
   const handleLogout = async () => {
     try {
-        await axiosInstance.post('/logout');
-        localStorage.setItem('loggedIn', false);
-        navigate('/login');
+      await axiosInstance.post('/logout');
+      localStorage.setItem('loggedIn', false);
+      setIsLoggedIn(false);
+      setUserBadge(null);  // Clear the badge info when logged out
+      navigate('/login');
     } catch (error) {
-        console.error("Logout failed", error);
+      console.error("Logout failed", error);
     }
-};
+  };
 
-const handleSearch = (e) => {
-  e.preventDefault();
-  if (searchTerm.trim()) {
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
       navigate(`/search?name=${searchTerm}`);
-  }
-};
+    }
+  };
 
   return (
     <header className="header">
@@ -47,20 +67,32 @@ const handleSearch = (e) => {
         
         <nav className="navigation">
         <ul className="nav-list">
-          <li><Link to ="/products">Shop</Link></li>
-          <li><Link to ="/sellers">Sellers</Link></li>
-          <li><Link to ="/about">About</Link></li>
-          <li>{localStorage.getItem('loggedIn') === 'true' ? (
+        {isLoggedIn && userBadge && (
+        <div className="user-badge">
+          <div className="initials">{userBadge.initials}</div>
+          {userBadge.seller && <span className="verified-check">✔️</span>}
+        </div>
+      )}
+          <li><Link to="/products">Shop</Link></li>
+          <li><Link to="/sellers">Sellers</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li>
+            {isLoggedIn ? (
               <Link onClick={handleLogout}>Logout</Link>
-                 ) : (<Link to="/login">Login</Link>)}
+            ) : (
+              <Link to="/login">Login</Link>
+            )}
           </li>
-          <li><Link to ="/cart">Cart</Link></li>
+          <li><Link to="/cart">Cart</Link></li>
         </ul>
       </nav>
       </div>
       </div>
+
     </header>
   );
 };
 
 export default Header;
+
+
