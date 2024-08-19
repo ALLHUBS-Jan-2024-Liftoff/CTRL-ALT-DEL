@@ -36,7 +36,7 @@ public class CartService {
             if (cartItem != null) {
                 cartItem.setQuantity(cartItem.getQuantity() + quantity);
             } else {
-                cartItem = new CartItem(product, quantity);
+                cartItem = new CartItem();
                 cart.addCartItem(cartItem);
             }
 

@@ -27,6 +27,9 @@ export const deleteProduct = (id) => {
         }
 };
 export const searchProducts = (searchTerm) => axios.get(`${API_URL}/product/search?name=${searchTerm}`);
+export const getImagePath = (imagePath) => {
+    return axios.get(`${API_URL}/images/${imagePath}`);
+};
 
 
 export default axiosInstance;

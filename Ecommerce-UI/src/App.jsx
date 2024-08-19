@@ -19,15 +19,29 @@ import SuccessPage from './pages/SuccessPage';
 import CancelPage from './pages/CancelPage';
 import SearchProduct from "./components/SearchProduct";
 
-
 function App() {
   const [cartItems, setCartItems] = useState([]);
-  
-  const handleAddToCart = (product) => {
-    setCartItems((prevCart) => [...prevCart, product]);
+
+  const addToCart = (product) => {
+    const existingItem = cartItems.find(item => item.id === product.id);
+    if (existingItem) {
+      setCartItems(cartItems.map(item =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      ));
+    } else {
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
   };
 
+  const updateCartItemQuantity = (productId, newQuantity) => {
+    setCartItems(cartItems.map(item =>
+      item.id === productId ? { ...item, quantity: newQuantity } : item
+    ));
+  };
 
+  const removeCartItem = (productId) => {
+    setCartItems(cartItems.filter(item => item.id !== productId));
+  };
 
   return (
     <Router>
@@ -35,15 +49,21 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/products" element={<ProductsPage onAddToCart={handleAddToCart} />} />
+          <Route path="/products" element={<ProductsPage onAddToCart={addToCart} />} />
           <Route path="/newProduct" element={<ProductForm />} />
           <Route path="/manageProducts" element={<ManageProducts />} />
           <Route path="/updateProduct/:id" element={<ProductUpdateForm />} />
           <Route path="/sellers" element={<Sellers />} />
           <Route path="/listCategories" element={<CategoryList />} />
           <Route path="/newCategory" element={<CategoryForm />} />
-          <Route path="/cart" element={<Cart cartItems={cartItems} />} />
-           <Route path="/search" element={<SearchProduct />}/>
+          <Route path="/cart" element={
+            <Cart 
+              cartItems={cartItems} 
+              updateCartItemQuantity={updateCartItemQuantity} 
+              removeCartItem={removeCartItem} 
+            />
+          } />
+          <Route path="/search" element={<SearchProduct />} />
           <Route path="/checkout" element={<CheckoutForm cartItems={cartItems} />} />
           <Route path="/success" element={<SuccessPage />} />
           <Route path="/cancel" element={<CancelPage />} />

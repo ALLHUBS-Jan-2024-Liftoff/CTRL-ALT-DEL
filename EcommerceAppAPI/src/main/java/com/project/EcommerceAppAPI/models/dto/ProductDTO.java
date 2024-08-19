@@ -7,6 +7,7 @@ public class ProductDTO {
     private String description;
     private double price;
     private Long categoryId;
+    private String imagePath;
 
 
     public Long getId() {
@@ -49,8 +50,13 @@ public class ProductDTO {
         this.categoryId = categoryId;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
 
-
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
     @Override
     public String toString() {

@@ -1,6 +1,7 @@
 package com.project.EcommerceAppAPI.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
@@ -14,6 +15,9 @@ public class Product extends AbstractProducts{
     @JsonManagedReference
     private ProductCategory productCategory;
 
+    @Column(name = "image_path", nullable = false)  // Maps to image_path in the database
+    private String imagePath;
+
     public Product(int price, ProductCategory productCategory) {
         this.price = price;
         this.productCategory = productCategory;
@@ -24,6 +28,14 @@ public class Product extends AbstractProducts{
 
     public double getPrice() {
         return price;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public void setPrice(double price) {
