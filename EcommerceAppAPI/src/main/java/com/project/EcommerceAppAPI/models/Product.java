@@ -1,5 +1,6 @@
 package com.project.EcommerceAppAPI.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -11,10 +12,10 @@ public class Product extends AbstractProducts{
 
     @NotNull(message = "Category is required")
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference
     private ProductCategory productCategory;
 
-    public Product(int price, ProductCategory productCategory) {
+    public Product(double price, ProductCategory productCategory) {
         this.price = price;
         this.productCategory = productCategory;
     }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -17,7 +18,7 @@ import ProductUpdateForm from "./components/ProductUpdateForm";
 import SuccessPage from './pages/SuccessPage';
 import CancelPage from './pages/CancelPage';
 import SearchProduct from "./components/SearchProduct";
-
+import ProductDetails from "./components/ProductDetails";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -39,11 +40,12 @@ function App() {
           <Route path="/newProduct" element={<ProductForm />} />
           <Route path="/manageProducts" element={<ManageProducts />} />
           <Route path="/updateProduct/:id" element={<ProductUpdateForm />} />
+          <Route path="/productDetails/:id" element={<ProductDetails onAddToCart={handleAddToCart}/>} />
           <Route path="/sellers" element={<Sellers />} />
           <Route path="/listCategories" element={<CategoryList />} />
           <Route path="/newCategory" element={<CategoryForm />} />
           <Route path="/cart" element={<Cart cartItems={cartItems} />} />
-           <Route path="/search" element={<SearchProduct />}/>
+           <Route path="/search" element={<SearchProduct onAddToCart={handleAddToCart}/>}/>
           <Route path="/checkout" element={<CheckoutForm cartItems={cartItems} />} />
           <Route path="/success" element={<SuccessPage />} />
           <Route path="/cancel" element={<CancelPage />} />

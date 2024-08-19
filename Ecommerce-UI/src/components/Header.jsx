@@ -48,20 +48,24 @@ const Header = ({isLoggedIn, setIsLoggedIn}) => {
 
   return (
     <header className="header">
-      <div className="logo">Easy ECommerce</div>
+      <div className="container-fluid">
+        <div className="d-flex justify-content-between align-items-center">
+      <Link to="/" className="logo">Easy ECommerce</Link>
       <div className="search-container">
-        <form onSubmit={handleSearch}>
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button type="submit">Search</button>
-        </form>
-      </div>
-
-      <nav className="navigation">
+        {/* <input type="text" className="search-bar" placeholder="Start typing to search" /> */}
+                <form onSubmit={handleSearch}>
+                    <input
+                        type="text"
+                        className="search-bar"
+                        placeholder="Search products..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <button type="submit" className="search-button">Search</button>
+                </form>
+            </div>
+        
+        <nav className="navigation">
         <ul className="nav-list">
         {isLoggedIn && userBadge && (
         <div className="user-badge">
@@ -82,8 +86,9 @@ const Header = ({isLoggedIn, setIsLoggedIn}) => {
           <li><Link to="/cart">Cart</Link></li>
         </ul>
       </nav>
+      </div>
+      </div>
 
-    
     </header>
   );
 };

@@ -14,7 +14,9 @@ const ProductForm = ({ currentProduct }) => {
 
     useEffect(() => {
         setSuccess(false);
+        // if(!categories){
         fetchCategories();
+        // }
         if (currentProduct) {
             setProduct(currentProduct);
         }
