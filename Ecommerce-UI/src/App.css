@@ -297,7 +297,7 @@ body {
 .user-badge {
   display: flex;
   align-items: center;
-  background-color: #f0f0f0;
+  background-color: #6a6e71;
   padding: 5px 10px;
   border-radius: 20px;
 }
@@ -308,6 +308,6 @@ body {
 }
 
 .verified-check {
-  color: #1DA1F2; /* Twitter blue color */
+  color: #1d24f2; /* Twitter blue color */
   margin-left: 8px;
 }

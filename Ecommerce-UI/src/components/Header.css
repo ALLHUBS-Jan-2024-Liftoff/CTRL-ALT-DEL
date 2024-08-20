@@ -77,3 +77,8 @@
     padding: 3px 7px;
     font-size: 14px;
 }
+
+.verified-check {
+    color: #1d24f2; /* Twitter blue color */
+    margin-left: 8px;
+  }

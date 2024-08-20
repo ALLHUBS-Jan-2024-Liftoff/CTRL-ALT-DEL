@@ -1,97 +1,18 @@
-
-// import React from 'react';
-// import '../App.css';
-// import { Link } from 'react-router-dom';
-// import axiosInstance from '../services/axiosService';
-// import { useNavigate } from 'react-router-dom';
-// import { useState, useEffect } from 'react';
-
-// const Header = () => {
-//   const [searchTerm, setSearchTerm] = useState('');
-
-//   const navigate = useNavigate();
-//   const handleLogout = async () => {
-//     try {
-//         await axiosInstance.post('/logout');
-//         localStorage.setItem('loggedIn', false);
-//         navigate('/login');
-//     } catch (error) {
-//         console.error("Logout failed", error);
-//     }
-// };
-
-// const handleSearch = (e) => {
-//   e.preventDefault();
-//   if (searchTerm.trim()) {
-//       navigate(`/search?name=${searchTerm}`);
-//   }
-// };
-
-//   return (
-//     <header className="header">
-//       <div className="container-fluid">
-//         <div className="d-flex justify-content-between align-items-center">
-//       <Link to="/" className="logo">Easy ECommerce</Link>
-//       <div className="search-container">
-//         {/* <input type="text" className="search-bar" placeholder="Start typing to search" /> */}
-//                 <form onSubmit={handleSearch}>
-//                     <input
-//                         type="text"
-//                         className="search-bar"
-//                         placeholder="Search products..."
-//                         value={searchTerm}
-//                         onChange={(e) => setSearchTerm(e.target.value)}
-//                     />
-//                     <button type="submit" className="search-button">Search</button>
-//                 </form>
-//             </div>
-        
-//         <nav className="navigation">
-//         <ul className="nav-list">
-//           <li><Link to ="/products">Shop</Link></li>
-//           <li><Link to ="/sellers">Sellers</Link></li>
-//           <li><Link to ="/about">About</Link></li>
-//           <li>{localStorage.getItem('loggedIn') === 'true' ? (
-//               <Link onClick={handleLogout}>Logout</Link>
-//                  ) : (<Link to="/login">Login</Link>)}
-//           </li>
-//           <li><Link to ="/cart">Cart</Link></li>
-//         </ul>
-//       </nav>
-//       </div>
-//       </div>
-//     </header>
-//   );
-// };
-
-// export default Header;
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../services/axiosService';
-import { useCart } from '../components/CartProvider'; // Assuming you have a CartProvider
-import './Header.css'
+import { useCart } from '../components/CartProvider'; 
+import '../App.css'; // Ensure your styles are correctly imported
+import './Header.css'; // Assuming you have a specific CSS file for header styles
 
-import React, { useState, useEffect } from 'react';
-import '../App.css';
-import { Link, useNavigate } from 'react-router-dom';
-import axiosInstance from '../services/axiosService';
-
-
-const Header = ({isLoggedIn, setIsLoggedIn}) => {
-
+const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const [searchTerm, setSearchTerm] = useState('');
-
-  const navigate = useNavigate();
-
+  const [userBadge, setUserBadge] = useState(null);
   const { cartItems } = useCart();
+  const navigate = useNavigate();
 
   // Calculate the total number of items in the cart
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-
-  const [userBadge, setUserBadge] = useState(null);
- // const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('loggedIn') === 'true');
-
-  const navigate = useNavigate();
 
   // Fetch user badge info after login
   useEffect(() => {
@@ -107,14 +28,14 @@ const Header = ({isLoggedIn, setIsLoggedIn}) => {
 
       fetchUserBadge();
     }
-  }, [isLoggedIn]); 
+  }, [isLoggedIn]);
 
   const handleLogout = async () => {
     try {
       await axiosInstance.post('/logout');
       localStorage.setItem('loggedIn', false);
       setIsLoggedIn(false);
-      setUserBadge(null);  // Clear the badge info when logged out
+      setUserBadge(null); // Clear the badge info when logged out
       navigate('/login');
     } catch (error) {
       console.error("Logout failed", error);
@@ -125,7 +46,6 @@ const Header = ({isLoggedIn, setIsLoggedIn}) => {
     e.preventDefault();
     if (searchTerm.trim()) {
       navigate(`/search?name=${searchTerm}`);
-
     }
   };
 
@@ -135,6 +55,7 @@ const Header = ({isLoggedIn, setIsLoggedIn}) => {
         <div className="d-flex justify-content-between align-items-center">
 
           <Link to="/" className="logo">Easy ECommerce</Link>
+
           <div className="search-container">
             <form onSubmit={handleSearch}>
               <input
@@ -147,13 +68,20 @@ const Header = ({isLoggedIn, setIsLoggedIn}) => {
               <button type="submit" className="search-button">Search</button>
             </form>
           </div>
+
           <nav className="navigation">
             <ul className="nav-list">
+              {isLoggedIn && userBadge && (
+                <div className="user-badge">
+                  <div className="initials">{userBadge.initials}</div>
+                  {userBadge.seller && <span className="verified-check">✔</span>}
+                </div>
+              )}
               <li><Link to="/products">Shop</Link></li>
               <li><Link to="/sellers">Sellers</Link></li>
               <li><Link to="/about">About</Link></li>
               <li>
-                {localStorage.getItem('loggedIn') === 'true' ? (
+                {isLoggedIn ? (
                   <Link onClick={handleLogout}>Logout</Link>
                 ) : (
                   <Link to="/login">Login</Link>
@@ -174,51 +102,9 @@ const Header = ({isLoggedIn, setIsLoggedIn}) => {
             </ul>
           </nav>
         </div>
-
-      <Link to="/" className="logo">Easy ECommerce</Link>
-      <div className="search-container">
-        {/* <input type="text" className="search-bar" placeholder="Start typing to search" /> */}
-                <form onSubmit={handleSearch}>
-                    <input
-                        type="text"
-                        className="search-bar"
-                        placeholder="Search products..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    <button type="submit" className="search-button">Search</button>
-                </form>
-            </div>
-        
-        <nav className="navigation">
-        <ul className="nav-list">
-        {isLoggedIn && userBadge && (
-        <div className="user-badge">
-          <div className="initials">{userBadge.initials}</div>
-          {userBadge.seller && <span className="verified-check">✔️</span>}
-        </div>
-      )}
-          <li><Link to="/products">Shop</Link></li>
-          <li><Link to="/sellers">Sellers</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li>
-            {isLoggedIn ? (
-              <Link onClick={handleLogout}>Logout</Link>
-            ) : (
-              <Link to="/login">Login</Link>
-            )}
-          </li>
-          <li><Link to="/cart">Cart</Link></li>
-        </ul>
-      </nav>
       </div>
-
-      </div>
-
     </header>
   );
 };
 
 export default Header;
-
-
