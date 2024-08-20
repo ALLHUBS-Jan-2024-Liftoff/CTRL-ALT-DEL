@@ -19,42 +19,71 @@ import SuccessPage from './pages/SuccessPage';
 import CancelPage from './pages/CancelPage';
 import SearchProduct from "./components/SearchProduct";
 import ProductDetails from "./components/ProductDetails";
+import { CartProvider } from './components/CartProvider';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
+
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('loggedIn') === 'true');
-  
+
   const handleAddToCart = (product) => {
-    setCartItems((prevCart) => [...prevCart, product]);
+    const existingItem = cartItems.find(item => item.id === product.id);
+    if (existingItem) {
+      setCartItems(cartItems.map(item =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      ));
+    } else {
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
   };
 
+  // Function to update the quantity of items in the cart
+  const updateCartItemQuantity = (productId, newQuantity) => {
+    setCartItems(cartItems.map(item =>
+      item.id === productId ? { ...item, quantity: newQuantity } : item
+    ));
+  };
 
+  // Function to remove an item from the cart
+  const removeCartItem = (productId) => {
+    setCartItems(cartItems.filter(item => item.id !== productId));
+  };
 
   return (
-    <Router>
-      <div>
-        <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/products" element={<ProductsPage onAddToCart={handleAddToCart} />} />
-          <Route path="/newProduct" element={<ProductForm />} />
-          <Route path="/manageProducts" element={<ManageProducts />} />
-          <Route path="/updateProduct/:id" element={<ProductUpdateForm />} />
-          <Route path="/productDetails/:id" element={<ProductDetails onAddToCart={handleAddToCart}/>} />
-          <Route path="/sellers" element={<Sellers />} />
-          <Route path="/listCategories" element={<CategoryList />} />
-          <Route path="/newCategory" element={<CategoryForm />} />
-          <Route path="/cart" element={<Cart cartItems={cartItems} />} />
-           <Route path="/search" element={<SearchProduct onAddToCart={handleAddToCart}/>}/>
-          <Route path="/checkout" element={<CheckoutForm cartItems={cartItems} />} />
-          <Route path="/success" element={<SuccessPage />} />
-          <Route path="/cancel" element={<CancelPage />} />
-          <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="/register" element={<RegisterPage />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+
+    <CartProvider>
+      <Router>
+        <div>
+          <Header />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/products" element={<ProductsPage onAddToCart={handleAddToCart} />} />
+            <Route path="/newProduct" element={<ProductForm />} />
+            <Route path="/manageProducts" element={<ManageProducts />} />
+            <Route path="/updateProduct/:id" element={<ProductUpdateForm />} />
+            <Route path="/productDetails/:id" element={<ProductDetails onAddToCart={handleAddToCart} />} />
+            <Route path="/sellers" element={<Sellers />} />
+            <Route path="/listCategories" element={<CategoryList />} />
+            <Route path="/newCategory" element={<CategoryForm />} />
+            <Route path="/cart" element={
+              <Cart 
+                cartItems={cartItems} 
+                updateCartItemQuantity={updateCartItemQuantity} 
+                removeCartItem={removeCartItem} 
+              />
+            } />
+            <Route path="/search" element={<SearchProduct onAddToCart={handleAddToCart}/>} />
+            <Route path="/checkout" element={<CheckoutForm cartItems={cartItems} />} />
+            <Route path="/success" element={<SuccessPage />} />
+            <Route path="/cancel" element={<CancelPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
+    </CartProvider>
+
   );
 }
 
