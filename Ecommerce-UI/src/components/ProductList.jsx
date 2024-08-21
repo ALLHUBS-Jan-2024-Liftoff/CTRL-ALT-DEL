@@ -47,7 +47,7 @@ const ProductList = ({ onAddToCart }) => {
     };
 
     return (
-        <div className="product-list-container">
+        <div className="product-list-container mt-2 mb-5">
             <h2 className="product-list-title">All Products</h2>
             <div className="product-card-container">
                 {products.map(product => (
