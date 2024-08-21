@@ -99,21 +99,13 @@ const ProductUpdateForm = () => {
                 />
             </div>
             <div className="mt-2">
-                {/* <label className="form-label">Category ID</label>
-                <input
-                    type="number"
-                    name="categoryId"
-                    value={product.categoryId}
-                    onChange={handleChange}
-                    required
-                /> */}
                 <label className="form-label">Category</label>
                 <select
                     name="categoryId"
                     value={product.categoryId}
                     onChange={handleCategoryChange}
-                    required
-                >
+                    required>
+                        
                     <option value="">Select a category</option>
                     {categories.map((category) => (
                         <option key={category.id} value={category.id}>
