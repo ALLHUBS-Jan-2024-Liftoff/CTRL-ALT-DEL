@@ -1,41 +1,3 @@
-// import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import { getProductById, getCategoryById } from '../services/axiosService';
-
-// const ProductDetails = () => {
-//     const { id } = useParams();
-//     const [product, setProduct] = useState(null);
-//     const [categoryName, setCategoryName] = useState('');
-
-//     useEffect(() => {
-//         fetchProductDetails(id);
-//     }, [id]);
-
-//     const fetchProductDetails = async (productId) => {
-//         const response = await getProductById(productId);
-//         setProduct(response.data);
-
-//         const categoryResponse = await getCategoryById(response.data.categoryId);
-//         setCategoryName(categoryResponse.data.name);
-//     };
-
-//     if (!product) {
-//         return <p>Loading...</p>;
-//     }
-
-//     return (
-//         <div>
-//             <h2>Product Details</h2>
-//             <p><strong>Name:</strong> {product.name}</p>
-//             <p><strong>Description:</strong> {product.description}</p>
-//             <p><strong>Price:</strong> ${product.price}</p>
-//             <p><strong>Category:</strong> {categoryName}</p>
-//         </div>
-//     );
-// };
-
-// export default ProductDetails;
-
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductById, getCategories } from '../services/axiosService';
@@ -71,10 +33,18 @@ const ProductDetails = ({ onAddToCart }) => {
     }
 
     return (
-        <div className="product-details-container">
+        <div className="product-details-container mt-2 mb-5">
             <div className="product-image-container">
-                <img src={product.imageUrl} alt={product.name} className="product-image" />
-            </div>
+                            {product.imagePath ? (
+                                <img 
+                                    src={product.imagePath} 
+                                    alt={product.name} 
+                                    className="product-card-image"
+                                />
+                            ) : (
+                                <div className="product-card-no-image">No Image Available</div>
+                            )}
+                        </div>
             <div className="product-details-content">
                 <h1>{product.name}</h1>
                 <p>{product.description}</p>

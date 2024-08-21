@@ -19,20 +19,20 @@ const CategoryList = () => {
     };
 
     return (
-        <div className="mt-5">
+        <div className="mt-2 form-label mb-5">
             <h2>All Categories</h2>
             <table className="table table-hover">
-                <thead className="mt-3">
-                    <tr className="form-label">
-                        <th scope="col">Name</th>
-                        <th scope="col">Description</th>
+                <thead>
+                    <tr>
+                        <th class="text-start">Name</th>
+                        <th class="text-start">Description</th>
                     </tr>
                 </thead>
                 <tbody>
                     {categories.map(category => (
-                        <tr key={category.id}>
-                            <td>{category.name}</td>
-                            <td>{category.description}</td>
+                        <tr key={category.id} scope="row">
+                            <td class="text-start">{category.name}</td>
+                            <td class="text-start">{category.description}</td>
                         </tr>
                     ))}
                 </tbody>
