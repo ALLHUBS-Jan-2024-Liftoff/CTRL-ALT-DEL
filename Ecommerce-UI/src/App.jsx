@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import Cart from './pages/Cart';
+import ChatPage from './pages/ChatPage';
 import CheckoutForm from './components/CheckoutForm';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -78,6 +79,7 @@ function App() {
             <Route path="/cancel" element={<CancelPage />} />
             <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/ChatPage" element={<ChatPage />} />
           </Routes>
           <Footer />
         </div>
