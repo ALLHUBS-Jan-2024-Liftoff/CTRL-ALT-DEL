@@ -8,7 +8,7 @@ const UserBage = ({initials,isSeller,isVerifiedSeller}) => {
             {/* <div className="user-initials">{initials}</div> */}
             <span className="user-initials">{initials}</span>
             {isSeller && (
-                <span className="verified-check">✔️</span>
+                <span className="verified-check">✔</span>
             )}
         </div>
     );

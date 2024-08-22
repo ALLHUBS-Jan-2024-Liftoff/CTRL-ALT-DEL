@@ -28,7 +28,7 @@ const LoginPage = ({setIsLoggedIn}) => {
       if (response.status === 200) {
         setIsLoggedIn(true);
         localStorage.setItem('loggedIn', true);
-        navigate('/HomePage');
+        navigate('/products');
       }
     } catch (error) {
     if(error.response) {
