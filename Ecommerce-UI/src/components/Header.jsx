@@ -38,8 +38,8 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
       await axiosInstance.post('/logout');
       localStorage.setItem('loggedIn', false);
       setIsLoggedIn(false);
-      setUserBadge(null); 
-      navigate('/login');
+      setUserBadge(null); // Clear the badge info when logged out
+      navigate('/HomePage');
     } catch (error) {
       console.error("Logout failed", error);
     }
