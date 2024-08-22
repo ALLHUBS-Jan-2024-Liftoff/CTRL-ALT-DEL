@@ -285,7 +285,7 @@ body {
 
 .product-image {
   width: 100%;
-  height: auto;
+  height: 70%;
   border-radius: 8px;
 }
 
@@ -310,4 +310,109 @@ body {
 .verified-check {
   color: #1d24f2; /* Twitter blue color */
   margin-left: 8px;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+}
+
+.container {
+  max-width: 600px;
+  margin-top: 50px;
+}
+
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-header {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-control {
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.btn {
+  border-radius: 5px;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border: none;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+}
+
+.text-success {
+  font-weight: bold;
+  text-align: center;
+}
+
+
+/* Product Details Page */ 
+.product-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.product-info-section {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.product-image-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.product-details-content {
+  margin-top: 20px;
+}
+
+.product-reviews-section,
+.add-review-section {
+  width: 100%;
+  max-width: 800px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+reviews-list-group {
+  list-style: none; 
+  padding: 0; 
+}
+
+.reviews-list-item {
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.reviews-list-item h5 {
+  margin-bottom: 10px; 
+  font-weight: bold; 
+}
+
+.reviews-list-item p {
+  margin-bottom: 0; 
 }

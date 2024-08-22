@@ -1,54 +1,19 @@
-// import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import { getProductById, getCategoryById } from '../services/axiosService';
-
-// const ProductDetails = () => {
-//     const { id } = useParams();
-//     const [product, setProduct] = useState(null);
-//     const [categoryName, setCategoryName] = useState('');
-
-//     useEffect(() => {
-//         fetchProductDetails(id);
-//     }, [id]);
-
-//     const fetchProductDetails = async (productId) => {
-//         const response = await getProductById(productId);
-//         setProduct(response.data);
-
-//         const categoryResponse = await getCategoryById(response.data.categoryId);
-//         setCategoryName(categoryResponse.data.name);
-//     };
-
-//     if (!product) {
-//         return <p>Loading...</p>;
-//     }
-
-//     return (
-//         <div>
-//             <h2>Product Details</h2>
-//             <p><strong>Name:</strong> {product.name}</p>
-//             <p><strong>Description:</strong> {product.description}</p>
-//             <p><strong>Price:</strong> ${product.price}</p>
-//             <p><strong>Category:</strong> {categoryName}</p>
-//         </div>
-//     );
-// };
-
-// export default ProductDetails;
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductById, getCategories } from '../services/axiosService';
-import { useEffect, useState } from 'react';
+import ProductReviews from './ProductReviews';  
+import ReviewForm from './ReviewForm';
 
 const ProductDetails = ({ onAddToCart }) => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [categories, setCategories] = useState([]);
+    const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
         fetchProductDetails();
         fetchCategories();
+        fetchProductReviews();
     }, [id]);
 
     const fetchProductDetails = async () => {
@@ -61,6 +26,20 @@ const ProductDetails = ({ onAddToCart }) => {
         setCategories(response.data);
     };
 
+    const fetchProductReviews = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/reviews/product/${id}`);
+            const data = await response.json();
+            setReviews(data);
+        } catch (error) {
+            console.error("Error fetching reviews:", error);
+        }
+    };
+
+    const handleReviewAdded = (newReview) => {
+        setReviews(prevReviews => [...prevReviews, newReview]);
+    };
+
     const getCategoryNameById = (categoryId) => {
         const category = categories.find(cat => cat.id === categoryId);
         return category ? category.name : 'Unknown Category';
@@ -71,9 +50,19 @@ const ProductDetails = ({ onAddToCart }) => {
     }
 
     return (
-        <div className="product-details-container">
+        <div className="product-details-container mt-2 mb-5">
+        {/* Product Image and Details */}
+        <div className="product-info-section mb-5">
             <div className="product-image-container">
-                <img src={product.imageUrl} alt={product.name} className="product-image" />
+                {product.imagePath ? (
+                    <img 
+                        src={product.imagePath} 
+                        alt={product.name} 
+                        className="product-card-image"
+                    />
+                ) : (
+                    <div className="product-card-no-image">No Image Available</div>
+                )}
             </div>
             <div className="product-details-content">
                 <h1>{product.name}</h1>
@@ -83,6 +72,20 @@ const ProductDetails = ({ onAddToCart }) => {
                 <button onClick={() => onAddToCart(product)} className="btn btn-primary">Add to Cart</button>
             </div>
         </div>
+
+        {/* Reviews Section */}
+        <div className="product-reviews-section mt-4">
+            <h2>Reviews</h2>
+            <ProductReviews productId={id} />
+        
+
+        </div>
+
+        {/* Review Form */}
+        <div className="add-review-section mt-4">
+            <ReviewForm productId={id} onReviewAdded={handleReviewAdded} />
+        </div>
+    </div>
     );
 };
 

@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reviews")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ReviewController {
     @Autowired
     private ReviewService reviewService;
@@ -35,9 +36,9 @@ public class ReviewController {
     }
 
     // add a new review
-    @PostMapping("/")
-    public ResponseEntity<Review> addReview(@RequestBody ReviewDTO reviewDTO) {
-        Review review = reviewService.addReview(reviewDTO);
+    @PostMapping("/product/{productId}")
+    public ResponseEntity<Review> addReview(@PathVariable long productId, @RequestBody ReviewDTO reviewDTO) {
+        Review review = reviewService.addReview(productId, reviewDTO);
         return ResponseEntity.ok(review);
     }
 
