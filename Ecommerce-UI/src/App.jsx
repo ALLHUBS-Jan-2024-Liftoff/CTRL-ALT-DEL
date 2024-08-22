@@ -81,7 +81,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/ChatPage" element={<ChatPage setIsLoggedIn={setIsLoggedIn} />} />
           </Routes>
-          <Footer />
+          <Footer isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         </div>
       </Router>
     </CartProvider>

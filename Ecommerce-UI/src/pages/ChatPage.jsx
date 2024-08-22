@@ -16,7 +16,6 @@ const ChatPage = ({isLoggedIn}) => {
         // Establish WebSocket connection
         const socket = new SockJS('http://localhost:8080/api/ws');
         const client = Stomp.over(socket);
-    
         client.connect({}, () => {
           // Subscribe to the chat event
           client.subscribe('/topic/public', (evt) => {
@@ -53,6 +52,7 @@ const ChatPage = ({isLoggedIn}) => {
 
     const handleSubmitChat = (event) => {
         event.preventDefault();
+        event.stopPropagation();
         const message = event.target.message.value;
         const messageContent = message.trim();
         if(messageContent && stompClient) {
@@ -66,39 +66,30 @@ const ChatPage = ({isLoggedIn}) => {
         }
     };
 
-     const handleSubmitUsers = (event) => {
-        event.preventDefault();
-       if (stompClient) { 
-        stompClient.send("/app/chat.addUser", {}, JSON.stringify({ sender: userBadge.initials, type: "JOIN" }));
-        }
-    };
+    //  const handleSubmitUsers = (event) => {
+    //     event.preventDefault();
+    //    if (stompClient) { 
+    //     stompClient.send("/app/chat.addUser", {}, JSON.stringify({ sender: userBadge.initials, type: "JOIN" }));
+    //     }
+    // };
 
-    const handleMessageReceived = (payload) => {
-        const message = JSON.parse(payload.body);
-        if (message.type === "JOIN") {
-            setChatEvents((prevEvents) => [...prevEvents, { sender: message.sender, content: " joined the chat", type: "JOIN" }]);
-        } else if (message.type === "LEAVE") {
-            setChatEvents((prevEvents) => [...prevEvents, { sender: message.sender, content: " left the chat", type: "LEAVE" }]);
-        } else if (message.type === "CHAT") {
-            setChatEvents((prevEvents) => [...prevEvents, { sender: message.sender, content: message.content, type: "CHAT" }]);
-        }
-    };
+    // const handleMessageReceived = (payload) => {
+    //     const message = JSON.parse(payload.body);
+    //     if (message.type === "JOIN") {
+    //         setChatEvents((prevEvents) => [...prevEvents, { sender: message.sender, content: " joined the chat", type: "JOIN" }]);
+    //     } else if (message.type === "LEAVE") {
+    //         setChatEvents((prevEvents) => [...prevEvents, { sender: message.sender, content: " left the chat", type: "LEAVE" }]);
+    //     } else if (message.type === "CHAT") {
+    //         setChatEvents((prevEvents) => [...prevEvents, { sender: message.sender, content: message.content, type: "CHAT" }]);
+    //     }
+    // };
 
 
 
 return (
     <div>
-        <h1>Chat Page</h1>
-        {/* <form onSubmit={handleSubmitUsers}>
-            <button type="submit">Add User</button>
-        </form> */}
-        {/* <div className="chat-window">
-                {chatEvents.map((event, index) => (
-                    <div key={index} className={`chat-message ${event.type}`}>
-                        <strong>{event.sender}: </strong> {event.content}
-                    </div>
-                ))}
-        </div> */}
+        <h1>Live Chat</h1>
+    
         <form onSubmit={handleSubmitChat}>
             <input type="text" name ="message"/>
             <button type="submit">Send Message</button>
