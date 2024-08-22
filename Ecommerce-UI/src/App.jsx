@@ -9,6 +9,7 @@ import CheckoutForm from './components/CheckoutForm';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProductsPage from './pages/ProductsPage';
+import ChatPage from './pages/ChatPage';
 import ProductForm from './components/ProductForm';
 import CategoryForm from './components/CategoryForm';
 import CategoryList from './components/CategoryList';
@@ -63,8 +64,9 @@ function AppContent() {
         <Route path="/cancel" element={<CancelPage />} />
         <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/ChatPage" element={<ChatPage setIsLoggedIn={setIsLoggedIn} />} />
       </Routes>
-      <Footer />
+      <Footer isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
     </>
   );
 }
