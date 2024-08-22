@@ -2,19 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../services/axiosService';
 import { useCart } from '../components/CartProvider'; 
-import '../App.css'; // Ensure your styles are correctly imported
-import './Header.css'; // Assuming you have a specific CSS file for header styles
+import '../App.css'; 
+import './Header.css'; 
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [userBadge, setUserBadge] = useState(null);
   const { cartItems } = useCart();
+  console.log(cartItems);
   const navigate = useNavigate();
 
-  // Calculate the total number of items in the cart
+  
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  
 
-  // Fetch user badge info after login
+
+
   useEffect(() => {
     if (isLoggedIn) {
       const fetchUserBadge = async () => {
@@ -35,7 +38,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
       await axiosInstance.post('/logout');
       localStorage.setItem('loggedIn', false);
       setIsLoggedIn(false);
-      setUserBadge(null); // Clear the badge info when logged out
+      setUserBadge(null); 
       navigate('/login');
     } catch (error) {
       console.error("Logout failed", error);
@@ -48,6 +51,10 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
       navigate(`/search?name=${searchTerm}`);
     }
   };
+
+  useEffect(() => {
+    console.log('Header re-rendered. Cart items:', cartItems);
+}, [cartItems]);
 
   return (
     <header className="header">
@@ -94,9 +101,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
                     alt="Shopping Cart" 
                     className="header-cart-icon"
                   />
-                  {totalItems > 0 && (
-                    <span className="header-cart-count">{totalItems}</span>
-                  )}
+                  <span className="header-cart-count">{totalItems}</span>
                 </Link>
               </li>
             </ul>
