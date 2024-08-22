@@ -1,7 +1,9 @@
 package com.project.EcommerceAppAPI.Services;
 
+import com.project.EcommerceAppAPI.models.Product;
 import com.project.EcommerceAppAPI.models.Review;
 import com.project.EcommerceAppAPI.models.dto.ReviewDTO;
+import com.project.EcommerceAppAPI.repositories.ProductRepository;
 import com.project.EcommerceAppAPI.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,16 +16,28 @@ public class ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     // get all reviews for a specific product
     public List<Review> getReviewsByProductId(long productId) {
         return reviewRepository.findByProductId(productId);
     }
 
     // add a new review
-    public Review addReview(ReviewDTO reviewDTO) {
+    public Review addReview(long productId, ReviewDTO reviewDTO) {
+        // fetch product by id
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        if (!optionalProduct.isPresent()) {
+            throw new IllegalArgumentException("Product not found.");
+        }
+
+        Product product = optionalProduct.get();
+
         Review review = new Review();
         review.setUserId(reviewDTO.getUserId());
-        review.setProductId(reviewDTO.getProductId());
+        review.setProduct(product);
+//        review.setProductId(reviewDTO.getProductId());
         review.setRating(reviewDTO.getRating());
         review.setComment(reviewDTO.getComment());
         // date will be automatically set by database
