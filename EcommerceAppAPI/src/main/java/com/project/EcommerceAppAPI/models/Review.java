@@ -13,7 +13,9 @@ public class Review {
     private int reviewId;
 
     private int userId;
-    private long productId;
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
     private int rating;
     private String comment;
 
@@ -36,12 +38,12 @@ public class Review {
         this.userId = userId;
     }
 
-    public long getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(long productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getRating() {
@@ -73,7 +75,7 @@ public class Review {
         return "Review{" +
                 "reviewId=" + reviewId +
                 ", userId=" + userId +
-                ", productId=" + productId +
+                ", productId=" + product +
                 ", rating=" + rating +
                 ", comment='" + comment + '\'' +
                 ", reviewDate=" + reviewDate +

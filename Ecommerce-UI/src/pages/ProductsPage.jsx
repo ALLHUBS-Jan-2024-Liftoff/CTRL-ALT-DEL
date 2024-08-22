@@ -32,7 +32,6 @@ const ProductsPage = ({ onAddToCart }) => {
                   />
               ) : (
                   <div>
-                      {/* <button onClick={() => setIsFormVisible(true)}>Add Product</button> */}
                       <ProductList onEdit={handleEdit} onAddToCart={onAddToCart} />
                   </div>
               )}
