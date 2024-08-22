@@ -19,6 +19,7 @@ import SuccessPage from './pages/SuccessPage';
 import CancelPage from './pages/CancelPage';
 import SearchProduct from "./components/SearchProduct";
 import ProductDetails from "./components/ProductDetails";
+import About from './components/About';
 import { CartProvider, useCart } from './components/CartProvider'; 
 
 function App() {
@@ -40,6 +41,7 @@ function AppContent() {
       <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<About />} />
         <Route path="/products" element={<ProductsPage onAddToCart={addToCart} />} />
         <Route path="/newProduct" element={<ProductForm />} />
         <Route path="/manageProducts" element={<ManageProducts />} />
