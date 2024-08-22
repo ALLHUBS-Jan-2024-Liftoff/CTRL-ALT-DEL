@@ -18,6 +18,8 @@ Welcome to **Easy Market Place** – a React-based e-commerce web application wh
   - Create, read, update, and delete (CRUD) products.
   - Create and list product categories
   - Manage product details including name, description, price, and images.
+  - Chat to communicate with seller.
+  - Create and manage user profile.
   
 - **Buyer Functionality:**
   - List all products.
@@ -25,6 +27,7 @@ Welcome to **Easy Market Place** – a React-based e-commerce web application wh
   - View product details on a dedicated product page.
   - Add products to a cart and manage cart items.
   - Secure checkout process using Stripe API integration.
+  - Can request to be a retail seller.
 
 
 ## Demo
@@ -39,12 +42,14 @@ You can run the application locally by following the installation and usage inst
   - Vite for development and build tooling
   - Axios for API requests
   - Bootstrap for styling
+  - Stomp and sockjs
   
 - **Backend:**
   - Spring Boot
   - Hibernate JPA for ORM
   - MySQL database
   - Stripe API for payment processing
+  - WebSocket
 
 - **Tools:**
   - Postman for API testing
