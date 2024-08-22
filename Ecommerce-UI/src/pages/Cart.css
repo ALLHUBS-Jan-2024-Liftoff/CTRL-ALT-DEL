@@ -1,5 +1,5 @@
 .cart-container {
-    max-width: 800px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     background-color: #f8f9fa;
@@ -86,3 +86,5 @@
 .cart-checkout-button:hover {
     background-color: #218838;
 }
+
+
