@@ -4,8 +4,6 @@ import com.project.EcommerceAppAPI.models.ChatMessage;
 import com.project.EcommerceAppAPI.models.MessageType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-//import lombok.var;
-//import org.hibernate.Session;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;

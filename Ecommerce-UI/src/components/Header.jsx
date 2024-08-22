@@ -36,7 +36,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
       localStorage.setItem('loggedIn', false);
       setIsLoggedIn(false);
       setUserBadge(null); // Clear the badge info when logged out
-      navigate('/login');
+      navigate('/HomePage');
     } catch (error) {
       console.error("Logout failed", error);
     }

@@ -79,7 +79,7 @@ function App() {
             <Route path="/cancel" element={<CancelPage />} />
             <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/ChatPage" element={<ChatPage />} />
+            <Route path="/ChatPage" element={<ChatPage setIsLoggedIn={setIsLoggedIn} />} />
           </Routes>
           <Footer />
         </div>
