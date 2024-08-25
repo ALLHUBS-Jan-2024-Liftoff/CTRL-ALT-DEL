@@ -22,6 +22,8 @@ import SearchProduct from "./components/SearchProduct";
 import ProductDetails from "./components/ProductDetails";
 import About from './components/About';
 import OrderHistory from './components/OrderHistory';
+import CategoryProductPage from './pages/CategoryProductPage';
+import ContentArea from './components/ContentArea';
 import { CartProvider, useCart } from './components/CartProvider'; 
 
 function App() {
@@ -67,6 +69,8 @@ function AppContent() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/ChatPage" element={<ChatPage setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/order-history" element={<OrderHistory />} />
+        <Route path="/category/:categoryId" element={<CategoryProductPage />} />
+        <Route path="/" element={<ContentArea />} />
       </Routes>
       <Footer isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
     </>
