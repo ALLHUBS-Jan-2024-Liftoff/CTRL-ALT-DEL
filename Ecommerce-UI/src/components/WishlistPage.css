@@ -1,0 +1,49 @@
+
+.wishlist-container {
+  max-width: 1200px;
+  background: none; /* Remove background */
+  box-shadow: none; /* Remove shadow */
+  padding: 0; /* Remove padding */
+  margin: 0 auto; /* Center the container */
+}
+
+.wishlist-card {
+  width: 100%; /* Take up the full width of the column */
+  max-width: 350px; /* Maximum width to prevent cards from getting too wide */
+  margin: 0 auto; /* Center the card */
+}
+
+.wishlist-image {
+  height: 200px;
+  object-fit: cover; /* Ensure the image covers the area without distorting */
+}
+
+.btn-block {
+  width: 48%;
+  margin: 0;
+}
+
+.btn-block + .btn-block {
+  margin-left: 4%;
+}
+
+.card-body {
+  text-align: center;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa; /* Light background color for the entire page */
+}
+
+.header-container {
+  width: 100%;
+  background: none;
+  box-shadow: none;
+}
+
+.header {
+  padding: 0;
+  margin: 0;
+}

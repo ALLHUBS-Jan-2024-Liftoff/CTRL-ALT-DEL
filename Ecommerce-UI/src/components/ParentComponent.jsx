@@ -10,7 +10,10 @@ const ParentComponent = () => {
 
     return (
         <div>
-            <ProductList onAddToCart={handleAddToCart} />
+            <ProductList 
+            onAddToCart={handleAddToCart}
+            />
+            
             <h2>Cart</h2>
             <ul>
                 {cart.map((item, index) => (

@@ -87,6 +87,9 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
               <li><Link to="/products">Shop</Link></li>
               <li><Link to="/sellers">Sellers</Link></li>
               <li><Link to="/about">About</Link></li>
+              {isLoggedIn && (
+              <li><Link to="/wishlist">Wishlist</Link></li>
+              )}
               <li>
                 {isLoggedIn ? (
                   <Link onClick={handleLogout}>Logout</Link>

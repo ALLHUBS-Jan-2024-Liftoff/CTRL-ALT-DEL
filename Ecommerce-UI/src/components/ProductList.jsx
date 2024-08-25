@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getProducts, getCategories } from '../services/axiosService';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './ProductList.css'; 
 
 const ProductList = ({ onAddToCart }) => {
@@ -46,6 +47,22 @@ const ProductList = ({ onAddToCart }) => {
         return category ? category.name : 'Unknown Category';
     };
 
+    const handleAddToWishlist = (product) => {
+        axios.post('http://localhost:8080/api/wishlist/add', null, {
+            params: {
+                productId: product.id
+            },
+            withCredentials: true
+        })
+        .then(response => {
+            alert('Product added to wishlist');
+        })
+        .catch(error => {
+            console.error('There was an error adding the product to the wishlist!', error);
+            alert('Error adding product to wishlist');
+        });
+    };
+
     return (
         <div className="product-list-container mt-2 mb-5">
             <h2 className="product-list-title">All Products</h2>
@@ -77,9 +94,18 @@ const ProductList = ({ onAddToCart }) => {
                                     e.stopPropagation(); 
                                     onAddToCart(product);
                                 }}
-                                className="btn btn-primary mt-3"
+                                className="btn btn-primary mt-3 product-card-button"
                             >
                                 Add to Cart
+                            </button>
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleAddToWishlist(product);
+                                }}
+                                className="btn btn-secondary mt-2 product-card-button"
+                            >
+                                Add to Wishlist
                             </button>
                         </div>
                     </div>
