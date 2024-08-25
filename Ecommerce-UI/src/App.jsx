@@ -21,6 +21,8 @@ import CancelPage from './pages/CancelPage';
 import SearchProduct from "./components/SearchProduct";
 import ProductDetails from "./components/ProductDetails";
 import About from './components/About';
+import WishlistPage from './components/WishlistPage';
+
 import { CartProvider, useCart } from './components/CartProvider'; 
 
 function App() {
@@ -65,6 +67,7 @@ function AppContent() {
         <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/ChatPage" element={<ChatPage setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/wishlist" element={<WishlistPage />} />
       </Routes>
       <Footer isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
     </>

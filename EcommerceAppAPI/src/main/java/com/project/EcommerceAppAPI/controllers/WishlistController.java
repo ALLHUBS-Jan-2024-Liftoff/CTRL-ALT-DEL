@@ -10,8 +10,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
-@RequestMapping("/wishlist")
+@RequestMapping("/api/wishlist")
 public class WishlistController {
 
     @Autowired
@@ -19,8 +20,9 @@ public class WishlistController {
 
     @GetMapping
     public List<Wishlist> getWishList(HttpSession session) {
-        Integer userId = (Integer) session.getAttribute("user_id");
+        Integer userId = (Integer) session.getAttribute("user");
         if (userId == null) {
+            System.out.println("User not logged in, throwing UNAUTHORIZED exception.");
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not logged in.");
         }
         return wishlistService.getWishlistByUser(userId);
@@ -28,7 +30,7 @@ public class WishlistController {
 
     @PostMapping("/add")
     public Wishlist addToWishlist(HttpSession session, @RequestParam Long productId) {
-        Integer userId = (Integer) session.getAttribute("user_id");
+        Integer userId = (Integer) session.getAttribute("user");
         if (userId == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not logged in.");
         }
@@ -37,7 +39,7 @@ public class WishlistController {
 
     @DeleteMapping("/remove")
     public void removeFromWishlist(HttpSession session, @RequestParam Long productId) {
-        Integer userId = (Integer) session.getAttribute("user_id");
+        Integer userId = (Integer) session.getAttribute("user");
         if (userId == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not logged in.");
         }

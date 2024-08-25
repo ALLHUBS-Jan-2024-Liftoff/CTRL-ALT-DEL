@@ -24,6 +24,8 @@ public class Wishlist {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    private int quantity =1;
+
     private Timestamp createdAt;
 
     // Getters and Setters
@@ -49,6 +51,14 @@ public class Wishlist {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity= quantity;
     }
 
     public Timestamp getCreatedAt() {

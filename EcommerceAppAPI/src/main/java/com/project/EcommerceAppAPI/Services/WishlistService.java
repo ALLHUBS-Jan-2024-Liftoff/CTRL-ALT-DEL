@@ -32,6 +32,7 @@ public class WishlistService {
 
         wishlist.setUser(user);
         wishlist.setProduct(product);
+        wishlist.setQuantity(wishlist.getQuantity() + 1);
         wishlist.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
         return wishlistRepository.save(wishlist);
