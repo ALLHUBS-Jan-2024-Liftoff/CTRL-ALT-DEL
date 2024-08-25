@@ -1,11 +1,13 @@
 package com.project.EcommerceAppAPI.controllers;
 
+import com.project.EcommerceAppAPI.Services.ProductService;
 import com.project.EcommerceAppAPI.models.Product;
 import com.project.EcommerceAppAPI.repositories.ProductRepository;
 import com.project.EcommerceAppAPI.models.ProductCategory;
 import com.project.EcommerceAppAPI.models.dto.ProductDTO;
 import com.project.EcommerceAppAPI.repositories.ProductCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,6 +22,8 @@ public class ProductController {
     private ProductRepository productRepository;
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
+    @Autowired
+    private ProductService productService;
 
     @GetMapping
     public List<ProductDTO> getAllProduct(){
@@ -37,6 +41,17 @@ public class ProductController {
         }
         return productDTOs;
     }
+
+        // Add a new method to fetch products by category
+        @GetMapping("/category/{categoryId}")
+        public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable Long categoryId) {
+            List<Product> products = productService.getProductsByCategory(categoryId);
+            if (products != null && !products.isEmpty()) {
+                return ResponseEntity.ok(products);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        }
 
     @PutMapping("/{productID}")
     public ProductDTO fetchAProduct(@PathVariable Long productID) {
