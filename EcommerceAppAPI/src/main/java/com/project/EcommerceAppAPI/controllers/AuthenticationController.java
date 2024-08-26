@@ -116,20 +116,20 @@ public class AuthenticationController {
 
         ResponseEntity response = null;
         Map<String, String> responseBody = new HashMap<>();
-        User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
+        User theUser = userRepository.findByUsername(loginFormDTO.getUsername()); //checks if a user exists with the provided username
         String password = loginFormDTO.getPassword();
         if (theUser == null) {
             responseBody.put("message", "Username does not exist");
             response = ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(responseBody);
-        }else if (!theUser.isMatchingPassword(password)) {
+        }else if (!theUser.isMatchingPassword(password)) {      //checks if the password matches
             responseBody.put("message", "Password does not match");
             response = ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(responseBody);
         } else {
-            setUserInSession(request.getSession(), theUser);
+            setUserInSession(request.getSession(), theUser);  //sets the user in the session and returns a response with an "OK" status
             responseBody.put("message", "User successfully logged in.");
             responseBody.put("username", theUser.getUsername());
             response = ResponseEntity
@@ -148,9 +148,11 @@ public class AuthenticationController {
     }
 
     @GetMapping("/user/badge")
+    // retrieves the current user from the HTTP session
     public ResponseEntity<UserBadgeDTO> getUserBadgeInfo(HttpSession session) {
         User currentUser = getUserFromSession(session);
 
+        // If the user is not found in session, return an unauthorized response
         if (currentUser == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
