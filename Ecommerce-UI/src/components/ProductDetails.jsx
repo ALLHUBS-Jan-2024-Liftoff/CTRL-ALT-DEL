@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getProductById, getCategories } from '../services/axiosService';
 import ProductReviews from './ProductReviews';  
 import ReviewForm from './ReviewForm';
+import axios from 'axios';
 
 const ProductDetails = ({ onAddToCart }) => {
     const { id } = useParams();
@@ -45,12 +46,30 @@ const ProductDetails = ({ onAddToCart }) => {
         return category ? category.name : 'Unknown Category';
     };
 
+    const handleAddToWishlist = () => {
+        axios.post('http://localhost:8080/api/wishlist/add', null, {
+            params: {
+                productId: id
+            },
+            withCredentials: true
+        })
+        .then(response => {
+            alert('Product added to wishlist');
+        })
+        .catch(error => {
+            console.error('There was an error adding the product to the wishlist!', error);
+            alert('Error adding product to wishlist');
+        });
+    };
+
+  
     if (!product) {
         return <div>Loading...</div>;
     }
 
     return (
         <div className="product-details-container mt-2 mb-5">
+
         {/* Product Image and Details */}
         <div className="product-info-section mb-5">
             <div className="product-image-container">
@@ -70,6 +89,7 @@ const ProductDetails = ({ onAddToCart }) => {
                 <h2>${product.price}</h2>
                 <p>Category: {getCategoryNameById(product.categoryId)}</p>
                 <button onClick={() => onAddToCart(product)} className="btn btn-primary">Add to Cart</button>
+                <button onClick={handleAddToWishlist} className="btn btn-secondary">Add to Wishlist</button>
             </div>
         </div>
 

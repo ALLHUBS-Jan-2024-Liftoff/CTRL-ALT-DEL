@@ -117,3 +117,4 @@ const ChatPage = ({isLoggedIn}) => {
 };
 
 export default ChatPage
+
