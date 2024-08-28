@@ -18,8 +18,8 @@ public class ReviewController {
 
     // get all reviews for a specific product
     @GetMapping("/product/{productId}")
-    public ResponseEntity<List<Review>> getReviewsByProductId(@PathVariable long productId) {
-        List<Review> reviews = reviewService.getReviewsByProductId(productId);
+    public ResponseEntity<List<Review>> getReviewsByProductId(@PathVariable long productId, @RequestParam(required = false) String sortBy, @RequestParam(required = false) Integer minRating, @RequestParam(required = false) Integer maxRating) {
+        List<Review> reviews = reviewService.getReviewsByProductId(productId, sortBy, minRating, maxRating);
         return ResponseEntity.ok(reviews);
     }
 
