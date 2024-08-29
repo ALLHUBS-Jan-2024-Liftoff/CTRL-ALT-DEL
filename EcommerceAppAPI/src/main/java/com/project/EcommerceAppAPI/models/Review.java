@@ -26,10 +26,6 @@ public class Review {
         return reviewId;
     }
 
-    public void setReviewId(int reviewId) {
-        this.reviewId = reviewId;
-    }
-
     public int getUserId() {
         return userId;
     }
@@ -70,15 +66,5 @@ public class Review {
         this.reviewDate = reviewDate;
     }
 
-    @Override
-    public String toString() {
-        return "Review{" +
-                "reviewId=" + reviewId +
-                ", userId=" + userId +
-                ", productId=" + product +
-                ", rating=" + rating +
-                ", comment='" + comment + '\'' +
-                ", reviewDate=" + reviewDate +
-                '}';
-    }
+
 }

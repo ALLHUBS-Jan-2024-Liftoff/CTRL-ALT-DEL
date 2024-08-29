@@ -8,8 +8,10 @@ import com.project.EcommerceAppAPI.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
@@ -20,8 +22,27 @@ public class ReviewService {
     private ProductRepository productRepository;
 
     // get all reviews for a specific product
-    public List<Review> getReviewsByProductId(long productId) {
-        return reviewRepository.findByProductId(productId);
+    public List<Review> getReviewsByProductId(long productId, String sortBy, Integer minRating, Integer maxRating) {
+        List<Review> reviews = reviewRepository.findByProductId(productId);
+
+        if (minRating != null) {
+            reviews = reviews.stream()
+                    .filter(review -> review.getRating() >= minRating)
+                    .collect(Collectors.toList());
+        }
+
+        if (maxRating != null) {
+            reviews = reviews.stream()
+                    .filter(review -> review.getRating() <= maxRating)
+                    .collect(Collectors.toList());
+        }
+
+        if ("rating".equalsIgnoreCase(sortBy)) {
+            reviews.sort(Comparator.comparing(Review::getRating).reversed());
+        } else if ("date".equalsIgnoreCase(sortBy)) {
+            reviews.sort(Comparator.comparing(Review::getReviewDate).reversed());
+        }
+        return reviews;
     }
 
     // add a new review
