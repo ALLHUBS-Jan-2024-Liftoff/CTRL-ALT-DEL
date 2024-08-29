@@ -26,10 +26,6 @@ public class Review {
         return reviewId;
     }
 
-    public void setReviewId(int reviewId) {
-        this.reviewId = reviewId;
-    }
-
     public int getUserId() {
         return userId;
     }
